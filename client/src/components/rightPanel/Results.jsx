@@ -23,7 +23,7 @@ export default class Results extends Component {
             />
             <span>
               <h4 className="mb-0">John Doe</h4>
-              <p className="text-muted">32.149.17.249</p>
+              <p className="text-muted mb-0">32.149.17.249</p>
             </span>
           </ListGroupItem>
           <ListGroupItem className="pl-0 border-top border-bottom-0 d-flex flex-row justify-content-start">
@@ -33,7 +33,7 @@ export default class Results extends Component {
             />
             <span>
               <h4 className="mb-0">Bill Gates</h4>
-              <p className="text-muted">78.110.28.10</p>
+              <p className="text-muted mb-0">78.110.28.10</p>
             </span>
           </ListGroupItem>
           <ListGroupItem className="pl-0 border-top border-bottom-0 d-flex flex-row justify-content-start">
@@ -46,7 +46,33 @@ export default class Results extends Component {
             />
             <span>
               <h4 className="mb-0">Mark Zuckerberg</h4>
-              <p className="text-muted">121.47.126.91</p>
+              <p className="text-muted mb-0">121.47.126.91</p>
+            </span>
+          </ListGroupItem>
+          <ListGroupItem className="pl-0 border-top border-bottom-0 d-flex flex-row justify-content-start">
+            <i
+              className="mdi mdi-checkbox-blank-circle-outline"
+              style={{
+                fontSize: '26px',
+                marginRight: '5px'
+              }}
+            />
+            <span>
+              <h4 className="mb-0">Jeff Bezos</h4>
+              <p className="text-muted mb-0">198.207.142.97</p>
+            </span>
+          </ListGroupItem>
+          <ListGroupItem className="pl-0 border-top border-bottom-0 d-flex flex-row justify-content-start">
+            <i
+              className="mdi mdi-checkbox-marked-circle-outline"
+              style={{
+                fontSize: '26px',
+                marginRight: '5px'
+              }}
+            />
+            <span>
+              <h4 className="mb-0">Barack Obama</h4>
+              <p className="text-muted mb-0">79.191.106.188</p>
             </span>
           </ListGroupItem>
         </ListGroup>

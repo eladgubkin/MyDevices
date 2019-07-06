@@ -11,25 +11,12 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem
-  // UncontrolledCarousel,
-  // Progress,
-  // ListGroup,
-  // ListGroupItem,
-  // Row,
-  // Col,
-  // Form,
-  // FormGroup,
-  // Input
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 // import * as data from './data.jsx';
 
-/*--------------------------------------------------------------------------------*/
-/* Import images which are need for the HEADER                                    */
-/*--------------------------------------------------------------------------------*/
-// import logodarkicon from '../../assets/images/logo-icon.png';
-// import logolighticon from '../../assets/images/logo-light-icon.png';
-// import logodarktext from '../../assets/images/logo-text.png';
-// import logolighttext from '../../assets/images/logo-light-text.png';
+import logodarkicon from '../../assets/images/logo-icon.png';
+import logolighticon from '../../assets/images/logo-light-icon.png';
 import profilephoto from '../../assets/images/users/1.jpg';
 
 class Header extends React.Component {
@@ -43,23 +30,17 @@ class Header extends React.Component {
     };
     this.toggleMenu = this.toggleMenu.bind(this);
   }
-  /*--------------------------------------------------------------------------------*/
-  /*To open Search Bar                                                              */
-  /*--------------------------------------------------------------------------------*/
+
   toggleMenu() {
     document.getElementById('search').classList.toggle('show-search');
   }
-  /*--------------------------------------------------------------------------------*/
-  /*To open NAVBAR in MOBILE VIEW                                                   */
-  /*--------------------------------------------------------------------------------*/
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
-  /*--------------------------------------------------------------------------------*/
-  /*To open SIDEBAR-MENU in MOBILE VIEW                                             */
-  /*--------------------------------------------------------------------------------*/
+
   showMobilemenu() {
     document.getElementById('main-wrapper').classList.toggle('show-sidebar');
   }
@@ -130,17 +111,12 @@ class Header extends React.Component {
             {/* Logos Or Icon will be goes here for Light Layout && Dark Layout                */}
             {/*--------------------------------------------------------------------------------*/}
 
-            <NavbarBrand href="/">
+            <NavbarBrand tag={Link} to={'/'}>
               <b className="logo-icon">
-                {/* <img src={logodarkicon} alt="homepage" className="dark-logo" />
-                <img
-                  src={logolighticon}
-                  alt="homepage"
-                  className="light-logo"
-                /> */}
-                Logo
+                <img src={logodarkicon} alt="homepage" className="dark-logo" />
+                <img src={logolighticon} alt="homepage" className="light-logo" />
               </b>
-              <span className="logo-text">Text</span>
+              <span className="logo-text">Home Page</span>
             </NavbarBrand>
 
             {/*--------------------------------------------------------------------------------*/}

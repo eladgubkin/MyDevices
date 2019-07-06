@@ -1,4 +1,5 @@
 import Dashboard from '../views/Dashboard';
+
 var ThemeRoutes = [
   {
     navlabel: true,

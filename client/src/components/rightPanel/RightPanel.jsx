@@ -51,7 +51,7 @@ class RightPanel extends React.Component {
         <div className="customizer-body pt-3 pb-3">
           <div className="px-3">
             <Card>
-              <CardBody className="">
+              <CardBody>
                 <Nav tabs>
                   <NavItem>
                     <NavLink
