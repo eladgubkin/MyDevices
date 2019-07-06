@@ -2,9 +2,9 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Header from '../components/header/header.jsx';
 import Sidebar from '../components/sidebar/sidebar.jsx';
+import RightPanel from '../components/rightPanel/RightPanel';
 // import Footer from '../components/footer/footer.jsx';
 import ThemeRoutes from '../routes/routing.jsx';
-// import Home from '../views/Home';
 
 class Fulllayout extends React.Component {
   /*--------------------------------------------------------------------------------*/
@@ -18,10 +18,10 @@ class Fulllayout extends React.Component {
       width: window.innerWidth,
       settings: [
         {
-          theme: 'light',
+          theme: 'dark',
           layout: 'vertical',
           dir: 'ltr',
-          sidebartype: 'full',
+          sidebartype: 'mini-sidebar',
           sidebarpos: 'fixed',
           headerpos: 'fixed',
           boxed: 'full',
@@ -94,9 +94,6 @@ class Fulllayout extends React.Component {
     window.removeEventListener('resize', this.updateDimensions);
   }
   render() {
-    /*--------------------------------------------------------------------------------*/
-    /* Theme Setting && Layout Options wiil be Change From Here                       */
-    /*--------------------------------------------------------------------------------*/
     return (
       <div
         id="main-wrapper"
@@ -108,13 +105,7 @@ class Fulllayout extends React.Component {
         data-header-position={this.state.settings[0].headerpos}
         data-boxed-layout={this.state.settings[0].boxed}
       >
-        {/*--------------------------------------------------------------------------------*/}
-        {/* Header                                                                         */}
-        {/*--------------------------------------------------------------------------------*/}
         <Header data={this.state} />
-        {/*--------------------------------------------------------------------------------*/}
-        {/* Sidebar                                                                        */}
-        {/*--------------------------------------------------------------------------------*/}
         <Sidebar data={this.state} {...this.props} routes={ThemeRoutes} />
         {/*--------------------------------------------------------------------------------*/}
         {/* Page Main-Content                                                              */}
@@ -158,6 +149,16 @@ class Fulllayout extends React.Component {
           </div>
           {/* <Footer /> */}
         </div>
+        <RightPanel
+          darkTheme={this.darkTheme}
+          boxedTheme={this.boxedTheme}
+          rtl={this.rtl}
+          headerPosition={this.headerPosition}
+          sidebarPosition={this.sidebarPosition}
+          navbarbgChange={this.navbarbgChange}
+          sidebarbgChange={this.sidebarbgChange}
+          logobgChange={this.logobgChange}
+        />
       </div>
     );
   }

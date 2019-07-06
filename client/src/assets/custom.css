@@ -1,0 +1,44 @@
+/* No Scrollbar */
+.container-fluid,
+.page-wrapper {
+  /* height: 93.4864vh; */
+  height: 100vh;
+}
+
+/* account dropdown*/
+.dropdown-menu {
+  margin: 0;
+}
+
+/* Customizer */
+.customizer {
+  width: 445px;
+  right: -445px;
+}
+
+.customizer .px-3,
+.customizer .card {
+  /* min-height: 470px; */
+  height: 100%;
+}
+
+.customizer .service-panel-toggle {
+  background: #272c33;
+}
+
+@media (max-width: 500px) {
+  .customizer {
+    width: 100vw;
+    right: -100vw;
+  }
+}
+
+.nav-link {
+  user-select: none;
+}
+
+/* Sidebar */
+.sidebar-link,
+.sidebar-item {
+  cursor: default !important;
+}
