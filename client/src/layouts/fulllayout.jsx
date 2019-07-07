@@ -42,6 +42,19 @@ class Fulllayout extends React.Component {
       }
     });
   }
+
+  darkTheme = a => {
+    if (a.target.checked) {
+      let darktheme = JSON.parse(JSON.stringify(this.state.settings));
+      darktheme[0].theme = 'dark';
+      this.setState({ settings: darktheme });
+    } else {
+      let lighttheme = JSON.parse(JSON.stringify(this.state.settings));
+      lighttheme[0].theme = 'light';
+      this.setState({ settings: lighttheme });
+    }
+  };
+
   /*--------------------------------------------------------------------------------*/
   /*Life Cycle Hook, Applies when loading or resizing App                           */
   /*--------------------------------------------------------------------------------*/
@@ -105,7 +118,7 @@ class Fulllayout extends React.Component {
         data-header-position={this.state.settings[0].headerpos}
         data-boxed-layout={this.state.settings[0].boxed}
       >
-        <Header data={this.state} />
+        <Header data={this.state} darkTheme={this.darkTheme} />
         <Sidebar data={this.state} {...this.props} routes={ThemeRoutes} />
         {/*--------------------------------------------------------------------------------*/}
         {/* Page Main-Content                                                              */}

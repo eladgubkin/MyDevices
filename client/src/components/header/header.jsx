@@ -150,6 +150,18 @@ class Header extends React.Component {
               {/*--------------------------------------------------------------------------------*/}
               {/* Start Profile Dropdown                                                         */}
               {/*--------------------------------------------------------------------------------*/}
+              <div className="custom-control custom-checkbox my-2 d-flex  align-items-center">
+                <input
+                  type="checkbox"
+                  className="custom-control-input"
+                  name="theme-view"
+                  id="theme-view"
+                  onClick={this.props.darkTheme}
+                />
+                <label className="custom-control-label" htmlFor="theme-view">
+                  Dark Theme
+                </label>
+              </div>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret className="pro-pic">
                   <img

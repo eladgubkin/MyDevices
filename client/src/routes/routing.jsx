@@ -11,6 +11,12 @@ var ThemeRoutes = [
     name: 'Dashboard',
     icon: 'mdi mdi-view-dashboard',
     component: Dashboard
+  },
+  {
+    path: '/',
+    pathTo: '/dashboard',
+    name: 'Dashboard',
+    redirect: true
   }
 ];
 
