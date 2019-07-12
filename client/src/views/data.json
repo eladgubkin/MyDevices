@@ -1,0 +1,490 @@
+[
+  {
+    "name": "GAL_LAVIE",
+    "ip": "172.21.13.11",
+    "position": [-5, 50],
+    "alive": true,
+    "uptime": 88581,
+    "ping": 20
+  },
+  {
+    "name": "AVISHAG_HENDLER",
+    "ip": "172.21.13.12",
+    "position": [-11.5230875068685, 59.06250000000001],
+    "alive": true,
+    "uptime": 88581,
+    "ping": 20
+  },
+  {
+    "name": "Shlomik_dekel",
+    "ip": "172.21.13.7",
+    "position": [-13.923403897723347, 69.60937500000001],
+    "alive": false,
+    "uptime": 88581,
+    "ping": "unknown"
+  },
+  {
+    "name": "sahar_lufi",
+    "ip": "172.21.13.10",
+    "position": [-14.604847155053898, 80.50781250000001],
+    "alive": false,
+    "uptime": 88581,
+    "ping": "unknown"
+  },
+  {
+    "name": "SILLVIA",
+    "ip": "172.21.13.1",
+    "position": [-10.487811882056683, 90.703125],
+    "alive": false,
+    "uptime": 88581,
+    "ping": "unknown"
+  },
+  {
+    "name": "ORIT_LEWINSKY",
+    "ip": "172.21.13.3",
+    "position": [-5, 100],
+    "alive": false,
+    "uptime": 88581,
+    "ping": "unknown"
+  },
+  {
+    "name": "Tuval_Dory",
+    "ip": "172.21.12.13",
+    "position": [-5, 110],
+    "alive": false,
+    "uptime": 88581,
+    "ping": "unknown"
+  },
+  {
+    "name": "DANIT Adler",
+    "ip": "172.21.12.5",
+    "position": [-5, 120],
+    "alive": false,
+    "uptime": 88581,
+    "ping": "unknown"
+  },
+  {
+    "name": "HAKIMOVITCH",
+    "ip": "172.21.12.2",
+    "position": [-5, 130],
+    "alive": false,
+    "uptime": 1353323,
+    "ping": "unknown"
+  },
+  {
+    "name": "vered_luria",
+    "ip": "172.21.13.8",
+    "position": [-5, 140],
+    "alive": false,
+    "uptime": 88581,
+    "ping": "unknown"
+  },
+  {
+    "name": "ZVIEL_ADLER",
+    "ip": "172.21.12.1",
+    "position": [-5, 150],
+    "alive": false,
+    "uptime": 282560,
+    "ping": "unknown"
+  },
+  {
+    "name": "HAVI_ZIVONY",
+    "ip": "172.21.12.9",
+    "position": [-5, 160],
+    "alive": false,
+    "uptime": 88580,
+    "ping": "unknown"
+  },
+  {
+    "name": "SIMON_MEDALYA",
+    "ip": "172.21.12.3",
+    "position": [-5, 170],
+    "alive": false,
+    "uptime": 918810,
+    "ping": "unknown"
+  },
+  {
+    "name": "RONI SHAFRIR",
+    "ip": "172.21.12.4",
+    "position": [-12.211180191503997, 178.24218750000003],
+    "alive": false,
+    "uptime": 88580,
+    "ping": "unknown"
+  },
+  {
+    "name": "NURIT_ARARAT",
+    "ip": "172.21.12.10",
+    "position": [-11.5230875068685, 190.19531250000003],
+    "alive": false,
+    "uptime": 88572,
+    "ping": "unknown"
+  },
+  {
+    "name": "Dikla_Nusbaum",
+    "ip": "172.21.13.6",
+    "position": [-11.5230875068685, 200.7421875],
+    "alive": false,
+    "uptime": 1356978,
+    "ping": "unknown"
+  },
+  {
+    "name": "DANI_KOLNICK",
+    "ip": "172.21.13.5",
+    "position": [-12.554563528593656, 211.64062500000003],
+    "alive": false,
+    "uptime": 88580,
+    "ping": "unknown"
+  },
+  {
+    "name": "SARA AVNIN NEW",
+    "ip": "172.21.13.2",
+    "position": [-5, 220],
+    "alive": false,
+    "uptime": 88581,
+    "ping": "unknown"
+  },
+  {
+    "name": "SARA_LEVI",
+    "ip": "172.21.12.11",
+    "position": [-5, 230],
+    "alive": false,
+    "uptime": 2652825,
+    "ping": "unknown"
+  },
+  {
+    "name": "Milka_Ezroni",
+    "ip": "172.21.12.14",
+    "position": [-5, 240],
+    "alive": false,
+    "uptime": 88581,
+    "ping": "unknown"
+  },
+  {
+    "name": "URI_RUSO",
+    "ip": "172.21.12.7",
+    "position": [-5, 250],
+    "alive": false,
+    "uptime": 88581,
+    "ping": "unknown"
+  },
+  {
+    "name": "AVRAHAMI_KOL",
+    "ip": "172.21.12.8",
+    "position": [-5, 260],
+    "alive": false,
+    "uptime": 88306,
+    "ping": "unknown"
+  },
+  {
+    "name": "Uri_Lior",
+    "ip": "172.21.9.16",
+    "position": [-5, 50],
+    "alive": false,
+    "uptime": 71175,
+    "ping": "unknown"
+  },
+  {
+    "name": "NOGA BEN ISRAEL",
+    "ip": "172.21.9.13",
+    "position": [-5, 60],
+    "alive": false,
+    "uptime": 88323,
+    "ping": "unknown"
+  },
+  {
+    "name": "Shvika Yoram",
+    "ip": "172.21.9.15",
+    "position": [-16.63619187839765, 91.05468750000001],
+    "alive": false,
+    "uptime": 313621,
+    "ping": "unknown"
+  },
+  {
+    "name": "rita_kotavitzki",
+    "ip": "172.21.8.23",
+    "position": [-5, 80],
+    "alive": false,
+    "uptime": 63605,
+    "ping": "unknown"
+  },
+  {
+    "name": "Manos Gila",
+    "ip": "172.21.9.11",
+    "position": [-5, 90],
+    "alive": false,
+    "uptime": 88612,
+    "ping": "unknown"
+  },
+  {
+    "name": "hedva_maller",
+    "ip": "172.21.8.21",
+    "position": [-11.5230875068685, 101.95312500000001],
+    "alive": false,
+    "uptime": 88612,
+    "ping": "unknown"
+  },
+  {
+    "name": "Amnon_Cohen",
+    "ip": "172.21.9.1",
+    "position": [-14.26438308756265, 116.01562500000001],
+    "alive": false,
+    "uptime": 739641,
+    "ping": "unknown"
+  },
+  {
+    "name": "Shlomit_aviasaf",
+    "ip": "172.21.8.20",
+    "position": [-10.487811882056683, 120.58593750000001],
+    "alive": false,
+    "uptime": 88612,
+    "ping": "unknown"
+  },
+  {
+    "name": "ANAT GLASMAN",
+    "ip": "172.21.9.10",
+    "position": [-10.141931686131018, 130.07812500000003],
+    "alive": false,
+    "uptime": 88612,
+    "ping": "unknown"
+  },
+  {
+    "name": "AZULAY",
+    "ip": "172.21.9.7",
+    "position": [-11.867350911459308, 140.27343750000003],
+    "alive": false,
+    "uptime": 88612,
+    "ping": "unknown"
+  },
+  {
+    "name": "AVIV_AZORI",
+    "ip": "172.21.9.0",
+    "position": [-5, 150],
+    "alive": false,
+    "uptime": 2461370,
+    "ping": "unknown"
+  },
+  {
+    "name": "michaeli geula",
+    "ip": "172.21.9.20",
+    "position": [-5, 160],
+    "alive": false,
+    "uptime": 25718,
+    "ping": "unknown"
+  },
+  {
+    "name": "Yehudit_Ben_Haim",
+    "ip": "172.21.9.14",
+    "position": [-5, 170],
+    "alive": false,
+    "uptime": 988343,
+    "ping": "unknown"
+  },
+  {
+    "name": "Omer Hasharoni",
+    "ip": "172.21.9.8",
+    "position": [-5, 180],
+    "alive": false,
+    "uptime": 88609,
+    "ping": "unknown"
+  },
+  {
+    "name": "TALI_LEWINSKY",
+    "ip": "172.21.9.12",
+    "position": [-5, 190],
+    "alive": false,
+    "uptime": 88612,
+    "ping": "unknown"
+  },
+  {
+    "name": "Marisa_landau",
+    "ip": "172.21.9.19",
+    "position": [-5, 200],
+    "alive": false,
+    "uptime": 817316,
+    "ping": "unknown"
+  },
+  {
+    "name": "Aya Halfin",
+    "ip": "172.21.9.9",
+    "position": [-5, 210],
+    "alive": false,
+    "uptime": 88367,
+    "ping": "unknown"
+  },
+  {
+    "name": "OHAD_LEHMAN",
+    "ip": "172.21.9.4",
+    "position": [-5, 220],
+    "alive": false,
+    "uptime": 753774,
+    "ping": "unknown"
+  },
+  {
+    "name": "ORIT_HOENSHTEIN",
+    "ip": "172.21.9.18",
+    "position": [-5, 230],
+    "alive": false,
+    "uptime": 890997,
+    "ping": "unknown"
+  },
+  {
+    "name": "Gad Barnea",
+    "ip": "172.21.9.2",
+    "position": [-5, 240],
+    "alive": false,
+    "uptime": 88612,
+    "ping": "unknown"
+  },
+  {
+    "name": "AVIV HASHARONI",
+    "ip": "172.21.9.6",
+    "position": [-5, 250],
+    "alive": false,
+    "uptime": 6626412,
+    "ping": "unknown"
+  },
+  {
+    "name": "PAPISH",
+    "ip": "172.21.10.15",
+    "position": [-5, 260],
+    "alive": false,
+    "uptime": 754399,
+    "ping": "unknown"
+  },
+  {
+    "name": "Adi Manos",
+    "ip": "172.21.10.10",
+    "position": [-5, 270],
+    "alive": false,
+    "uptime": 2731532,
+    "ping": "unknown"
+  },
+  {
+    "name": "Bracha Hadar",
+    "ip": "172.21.10.13",
+    "position": [-5, 280],
+    "alive": false,
+    "uptime": 754567,
+    "ping": "unknown"
+  },
+  {
+    "name": "nadav_hofman",
+    "ip": "172.21.10.18",
+    "position": [-5, 290],
+    "alive": false,
+    "uptime": 88615,
+    "ping": "unknown"
+  },
+  {
+    "name": "Reli Hadar",
+    "ip": "172.21.10.14",
+    "position": [-5, 300],
+    "alive": false,
+    "uptime": 88614,
+    "ping": "unknown"
+  },
+  {
+    "name": "hen_palones",
+    "ip": "172.21.10.17",
+    "position": [-5, 310],
+    "alive": false,
+    "uptime": 88614,
+    "ping": "unknown"
+  },
+  {
+    "name": "Ben Tal Keren",
+    "ip": "172.21.10.12",
+    "position": [-5, 320],
+    "alive": false,
+    "uptime": 1193840,
+    "ping": "unknown"
+  },
+  {
+    "name": "eyal_davidi",
+    "ip": "172.21.11.18",
+    "position": [-5, 330],
+    "alive": false,
+    "uptime": 88614,
+    "ping": "unknown"
+  },
+  {
+    "name": "tama_levi",
+    "ip": "172.21.11.15",
+    "position": [-5, 340],
+    "alive": false,
+    "uptime": 210595,
+    "ping": "unknown"
+  },
+  {
+    "name": "Yossi Amzaleg",
+    "ip": "172.21.11.4",
+    "position": [-5, 350],
+    "alive": false,
+    "uptime": 88614,
+    "ping": "unknown"
+  },
+  {
+    "name": "HANDLER_O",
+    "ip": "172.21.11.16",
+    "position": [-5, 360],
+    "alive": false,
+    "uptime": 88614,
+    "ping": "unknown"
+  },
+  {
+    "name": "ADLER_Y",
+    "ip": "172.21.11.6",
+    "position": [-5, 370],
+    "alive": false,
+    "uptime": 88367,
+    "ping": "unknown"
+  },
+  {
+    "name": "Yosef_Salai",
+    "ip": "172.21.11.10",
+    "position": [-5, 380],
+    "alive": false,
+    "uptime": 27044,
+    "ping": "unknown"
+  },
+  {
+    "name": "Rivka_Biton",
+    "ip": "172.21.11.13",
+    "position": [-5, 390],
+    "alive": false,
+    "uptime": 573250,
+    "ping": "unknown"
+  },
+  {
+    "name": "NURIT_SHOSHANI",
+    "ip": "172.21.11.9",
+    "position": [-5, 400],
+    "alive": false,
+    "uptime": 88369,
+    "ping": "unknown"
+  },
+  {
+    "name": "LIORA_KLINBUM",
+    "ip": "172.21.11.11",
+    "position": [-5, 410],
+    "alive": false,
+    "uptime": 38320,
+    "ping": "unknown"
+  },
+  {
+    "name": "Zivi_Machanimi",
+    "ip": "172.21.11.14",
+    "position": [-5, 420],
+    "alive": false,
+    "uptime": 1009142,
+    "ping": "unknown"
+  },
+  {
+    "name": "ODED_INBAR",
+    "ip": "172.21.11.8",
+    "position": [-5, 430],
+    "alive": false,
+    "uptime": 88614,
+    "ping": "unknown"
+  }
+]

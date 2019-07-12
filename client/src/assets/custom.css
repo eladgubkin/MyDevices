@@ -1,13 +1,20 @@
-/* No Scrollbar */
-.container-fluid,
-.page-wrapper {
-  /* height: 93.4864vh; */
-  height: 100vh;
-}
-
 /* account dropdown*/
 .dropdown-menu {
   margin: 0;
+}
+
+.page-wrapper {
+  height: 100vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 /* Customizer */
