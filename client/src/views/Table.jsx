@@ -34,28 +34,24 @@ class Table extends Component {
           })}
           columns={[
             {
-              columns: [
-                {
-                  Header: 'Name',
-                  accessor: 'name'
-                },
-                {
-                  Header: 'IP',
-                  accessor: 'ip'
-                },
-                {
-                  Header: 'Alive',
-                  accessor: 'alive'
-                },
-                {
-                  Header: 'UpTime',
-                  accessor: 'uptime'
-                },
-                {
-                  Header: 'Ping',
-                  accessor: 'ping'
-                }
-              ]
+              Header: 'Name',
+              accessor: 'name'
+            },
+            {
+              Header: 'IP',
+              accessor: 'ip'
+            },
+            {
+              Header: 'Alive',
+              accessor: 'alive'
+            },
+            {
+              Header: 'UpTime',
+              accessor: 'uptime'
+            },
+            {
+              Header: 'Ping',
+              accessor: 'ping'
             }
           ]}
           defaultPageSize={data.length}
@@ -64,7 +60,7 @@ class Table extends Component {
           style={{
             height: '100%' // This will force the table body to overflow and scroll, since there is not enough room
           }}
-          className="-striped -highlight"
+          className="-highlight"
         />
       </CardBody>
     );
