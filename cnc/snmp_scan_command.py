@@ -1,11 +1,17 @@
 import pythonping
 from pysnmp.hlapi import *
 from multiprocessing import Pool
-from mydevices.cnc.command import Command, CommandType, CommandAnswer
-from mydevices.cnc.ip_utils import parse_network
-from mydevices.cnc.settings import DEFAULT_POOL_PROCSESES
-from mydevices.cnc.snmp import SNMPEndpoint, NetworkInterface
-from mydevices.cnc.settings import DEFAULT_POOL_PROCSESES
+from cnc.command import Command, CommandType, CommandAnswer
+from cnc.ip_utils import parse_network
+from cnc.settings import DEFAULT_POOL_PROCSESES
+from cnc.snmp import SNMPEndpoint, NetworkInterface
+from cnc.settings import DEFAULT_POOL_PROCSESES
+
+# Load IF-MIB
+from pysnmp.smi import builder, view, compiler, rfc1902
+mibBuilder = builder.MibBuilder()
+compiler.addMibCompiler(mibBuilder, sources=['http://mibs.snmplabs.com/asn1/@mib@'])
+mibBuilder.loadModules('SNMPv2-MIB', 'IF-MIB')
 
 snmp_engine = SnmpEngine()
 

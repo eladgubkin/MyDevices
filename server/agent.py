@@ -1,6 +1,6 @@
 import json
 import uuid
-from mydevices.cnc.command_factory import CommandAnswerFactory
+from cnc.command_factory import CommandAnswerFactory
 
 
 class Agent(object):

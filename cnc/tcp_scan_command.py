@@ -1,9 +1,9 @@
 import socket
 from itertools import product
 from multiprocessing import Pool
-from mydevices.cnc.command import Command, CommandType, CommandAnswer
-from mydevices.cnc.ip_utils import parse_network
-from mydevices.cnc.settings import DEFAULT_POOL_PROCSESES
+from cnc.command import Command, CommandType, CommandAnswer
+from cnc.ip_utils import parse_network
+from cnc.settings import DEFAULT_POOL_PROCSESES
 
 def scan_ip(ip, ports):
     s = socket.socket()

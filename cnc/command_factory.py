@@ -1,9 +1,9 @@
-from mydevices.cnc.command import CommandType
-from mydevices.cnc.transfer_command import TransferCommand, TransferCommandAnswer
-from mydevices.cnc.get_agents_command import GetAgentsCommand, GetAgentsCommandAnswer
-from mydevices.cnc.ping_command import PingCommand, PingCommandAnswer
-from mydevices.cnc.tcp_scan_command import TcpScanCommand, TcpScanCommandAnswer
-from mydevices.cnc.snmp_scan_command import SNMPScanCommand, SNMPScanCommandAnswer
+from cnc.command import CommandType
+from cnc.transfer_command import TransferCommand, TransferCommandAnswer
+from cnc.get_agents_command import GetAgentsCommand, GetAgentsCommandAnswer
+from cnc.ping_command import PingCommand, PingCommandAnswer
+from cnc.tcp_scan_command import TcpScanCommand, TcpScanCommandAnswer
+from cnc.snmp_scan_command import SNMPScanCommand, SNMPScanCommandAnswer
 
 COMMANDS = {
     CommandType.TRANSFER: (TransferCommand, TransferCommandAnswer),

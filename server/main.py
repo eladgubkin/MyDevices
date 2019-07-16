@@ -2,10 +2,10 @@ import asyncio
 from sanic import Sanic
 from sanic.response import html
 from json import loads as json_load, dumps as json_dump
-from mydevices.cnc.ping_command import PingCommand
-from mydevices.cnc.command_factory import CommandFactory, CommandAnswerFactory
-from mydevices.server.agent import Agent
-from mydevices.server.agent_manager import AgentManager
+from cnc.ping_command import PingCommand
+from cnc.command_factory import CommandFactory, CommandAnswerFactory
+from server.agent import Agent
+from server.agent_manager import AgentManager
 
 app = Sanic()
 

@@ -1,7 +1,7 @@
 import pythonping
 from multiprocessing import Pool
-from mydevices.cnc.command import Command, CommandType, CommandAnswer
-from mydevices.cnc.settings import DEFAULT_POOL_PROCSESES
+from cnc.command import Command, CommandType, CommandAnswer
+from cnc.settings import DEFAULT_POOL_PROCSESES
 
 
 class GetAgentsCommand(Command):

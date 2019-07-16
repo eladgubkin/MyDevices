@@ -1,7 +1,7 @@
 import pythonping
 from multiprocessing import Pool
-from mydevices.cnc.command import Command, CommandType, CommandAnswer
-from mydevices.cnc.settings import DEFAULT_POOL_PROCSESES
+from cnc.command import Command, CommandType, CommandAnswer
+from cnc.settings import DEFAULT_POOL_PROCSESES
 
 
 class TransferCommand(Command):
@@ -11,7 +11,7 @@ class TransferCommand(Command):
         self.command = command
 
     async def execute(self, agent_manager):
-        from mydevices.cnc.command_factory import CommandAnswerFactory
+        from cnc.command_factory import CommandAnswerFactory
         
         agent = agent_manager.get_agent(self.agent_id)
         await agent.send(self.command.serialize())
@@ -29,7 +29,7 @@ class TransferCommand(Command):
 
     @staticmethod
     def deserialize(data):
-        from mydevices.cnc.command_factory import CommandFactory
+        from cnc.command_factory import CommandFactory
 
         return TransferCommand(command_id=data['commandId'],
                                agent_id=data['agentId'], 

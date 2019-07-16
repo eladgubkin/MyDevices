@@ -1,7 +1,7 @@
 import asyncio
 import websockets
 import json
-from mydevices.cnc.command_factory import CommandFactory
+from cnc.command_factory import CommandFactory
 from multiprocessing import freeze_support
 
 async def handle_command(ws):

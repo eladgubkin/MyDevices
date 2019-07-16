@@ -1,8 +1,8 @@
 import pythonping
 from multiprocessing import Pool
-from mydevices.cnc.command import Command, CommandType, CommandAnswer
-from mydevices.cnc.ip_utils import parse_network
-from mydevices.cnc.settings import DEFAULT_POOL_PROCSESES
+from cnc.command import Command, CommandType, CommandAnswer
+from cnc.ip_utils import parse_network
+from cnc.settings import DEFAULT_POOL_PROCSESES
 
 def ping(ip):
     return (ip, pythonping.ping(ip, count=1).rtt_avg_ms)
