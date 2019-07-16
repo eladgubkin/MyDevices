@@ -21,13 +21,13 @@ class Table extends Component {
 
   render() {
     return (
-      <CardBody className="h-100">
+      <CardBody style={{ height: 'calc(100vh - 277px)' }}>
         <ReactTable
           data={data.map(doc => {
             return {
               name: doc.name,
               ip: doc.ip,
-              alive: doc.alive ? 'true' : 'false',
+              alive: doc.alive ? 'Alive' : 'Dead',
               uptime: this.msToTime(doc.uptime),
               ping: doc.ping
             };
@@ -42,7 +42,7 @@ class Table extends Component {
               accessor: 'ip'
             },
             {
-              Header: 'Alive',
+              Header: 'Status',
               accessor: 'alive'
             },
             {
@@ -57,8 +57,12 @@ class Table extends Component {
           defaultPageSize={data.length}
           showPagination={false}
           showPageSizeOptions={false}
+          showPaginationTop={false}
+          showPaginationBottom={false}
+          pageSizeOptions={[5, 10, 20, 25, 50, data.length]}
           style={{
-            height: '100%' // This will force the table body to overflow and scroll, since there is not enough room
+            height: '100%',
+            width: '100%'
           }}
           className="-highlight"
         />

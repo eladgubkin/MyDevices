@@ -2,7 +2,7 @@
   {
     "name": "GAL_LAVIE",
     "ip": "172.21.13.11",
-    "position": [-5, 50],
+    "position": [500, 1000],
     "alive": true,
     "uptime": 88581,
     "ping": 20
