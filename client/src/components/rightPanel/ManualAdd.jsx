@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { CardBody, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+
 export default class ManualAdd extends Component {
   render() {
     return (
