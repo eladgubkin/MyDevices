@@ -59,7 +59,7 @@ class Table extends Component {
           showPageSizeOptions={false}
           showPaginationTop={false}
           showPaginationBottom={false}
-          pageSizeOptions={[5, 10, 20, 25, 50, data.length]}
+          filterable
           style={{
             height: '100%',
             width: '100%'

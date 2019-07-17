@@ -157,6 +157,7 @@ class Header extends React.Component {
                   name="theme-view"
                   id="theme-view"
                   onClick={this.props.darkTheme}
+                  defaultChecked
                 />
                 <label className="custom-control-label" htmlFor="theme-view">
                   Dark Theme
