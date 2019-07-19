@@ -16,6 +16,8 @@ async def web_handler(request, ws):
     agent = Agent(ws)
     # agent_manager.add_agent(agent)
 
+    print('Connected')
+
     try:
         await agent.send({ 'agentId': agent.id })
 
