@@ -1,0 +1,46 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.page-wrapper > .page-content {
+  min-height: calc(100vh - 70px);
+}
+
+/* account dropdown*/
+.dropdown-menu {
+  margin: 0;
+}
+
+/* rightPanel */
+.customizer {
+  width: 445px;
+  right: -445px;
+}
+
+.customizer .px-3,
+.customizer .card {
+  height: 100%;
+}
+
+.customizer .service-panel-toggle {
+  background: #272c33;
+}
+
+@media (max-width: 500px) {
+  .customizer {
+    width: 100vw;
+    right: -100vw;
+  }
+}
+
+.nav-link {
+  user-select: none;
+}
+
+/* Sidebar */
+.sidebar-link,
+.sidebar-item {
+  cursor: default !important;
+}

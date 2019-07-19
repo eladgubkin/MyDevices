@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { CardBody } from 'reactstrap';
 import L from 'leaflet';
-import { Map as M, ImageOverlay, Marker, Tooltip } from 'react-leaflet';
-import * as data from './data.json';
+import { Map as M, ImageOverlay } from 'react-leaflet';
+import map from '../../assets/map.jpg';
 
 class Map extends Component {
   msToTime = duration => {
@@ -39,8 +39,8 @@ class Map extends Component {
           // setView={[1117, 2250]}
           zoomControl={true}
         >
-          <ImageOverlay url="map.jpg" bounds={[[0, 0], [2234, 4500]]} />
-
+          <ImageOverlay url={map} bounds={[[0, 0], [2234, 4500]]} />
+          {/* 
           {data.map((doc, i) => {
             return (
               <Marker
@@ -59,7 +59,7 @@ class Map extends Component {
                 </Tooltip>
               </Marker>
             );
-          })}
+          })} */}
         </M>
       </CardBody>
     );
