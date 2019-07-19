@@ -13,8 +13,11 @@ import classnames from 'classnames';
 import Overview from './Overview';
 import Map from './Map';
 import Table from './Table';
+// import { changeTab } from '../../state/ducks/settings/actions';
+import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
 
-export default class Tabs extends Component {
+class Tabs extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,6 +30,7 @@ export default class Tabs extends Component {
       this.setState({
         activeTab: tab
       });
+      // this.props.changeTab(tab);
     }
   };
 
@@ -61,7 +65,7 @@ export default class Tabs extends Component {
                   this.toggle('2');
                 }}
               >
-                Locations
+                Map
               </NavLink>
             </NavItem>
             <NavItem>
@@ -73,7 +77,19 @@ export default class Tabs extends Component {
                   this.toggle('3');
                 }}
               >
-                All Servers
+                Table
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                className={classnames({
+                  active: this.state.activeTab === '4'
+                })}
+                onClick={() => {
+                  this.toggle('4');
+                }}
+              >
+                Graph
               </NavLink>
             </NavItem>
           </Nav>
@@ -87,9 +103,27 @@ export default class Tabs extends Component {
             <TabPane tabId="3" className="h-100">
               <Table />
             </TabPane>
+            <TabPane tabId="4" className="h-100">
+              <CardBody style={{ height: 'calc(100vh - 277px)' }}>
+                <h4>Graph</h4>
+              </CardBody>
+            </TabPane>
           </TabContent>
         </CardBody>
       </Card>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  // currentTab: state.settings.currentTab
+});
+
+Tabs.propTypes = {
+  // changeTab: PropTypes.func.isRequired
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(Tabs);

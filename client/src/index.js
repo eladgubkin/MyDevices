@@ -4,10 +4,10 @@ import indexRoutes from './routes/index.jsx';
 import { Route, Switch } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './store';
+import store from './state/store';
 
 import './assets/scss/style.css';
-import './assets/custom.css';
+import './index.css';
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,5 +1,11 @@
 import uuidv4 from 'uuid/v4';
-import { TRANSFER, GET_AGENTS, PING, TCP_SCAN, SNMP_SCAN } from './types';
+
+// agentActions
+export const TRANSFER = 0;
+export const GET_AGENTS = 1;
+export const PING = 2;
+export const TCP_SCAN = 3;
+export const SNMP_SCAN = 4;
 
 export default class Agent {
   constructor() {

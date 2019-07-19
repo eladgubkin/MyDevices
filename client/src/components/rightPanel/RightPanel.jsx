@@ -94,7 +94,12 @@ class RightPanel extends React.Component {
                   <TabPane tabId="1">
                     <Row>
                       <Col sm="12">
-                        <NetworkScan rightPanelToggle={this.rightPanelToggle} />
+                        <NetworkScan
+                          rightPanelToggle={this.rightPanelToggle}
+                          // otherAgents={this.props.otherAgents}
+                          // searchComputers={this.props.searchComputers}
+                          // computers={this.props.computers}
+                        />
                       </Col>
                     </Row>
                   </TabPane>

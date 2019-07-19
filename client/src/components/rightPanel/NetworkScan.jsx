@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { CardBody, Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import Agent from '../../actions/agentActions';
+import { searchComputers } from '../../state/ducks/computer/actions';
+import { findAgents } from '../../state/ducks/agent/actions';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 const PROTOCOLS = [
   { key: 'snmp', displayName: 'SNMP' },
@@ -8,15 +11,12 @@ const PROTOCOLS = [
   { key: 'tcp', displayName: 'TCP' }
 ];
 
-export default class NetworkScan extends Component {
+class NetworkScan extends Component {
   constructor(props) {
     super(props);
-    this.agent = new Agent();
     this.protocolRef = React.createRef();
     this.agentIdRef = React.createRef();
     this.state = {
-      otherAgents: [],
-      computers: {},
       selectedData: {
         network: '172.21.12.0-172.21.12.255',
         community: 'public'
@@ -25,53 +25,11 @@ export default class NetworkScan extends Component {
   }
 
   componentDidMount() {
-    setInterval(() => {
-      this.agent.execute(this.agent.getAgents()).then(({ agents }) => {
-        this.setState({
-          ...this.state,
-          otherAgents: agents.filter(agentId => agentId !== this.agent.getAgentId())
-        });
-      });
-    }, 2000);
+    this.props.findAgents();
   }
 
-  searchComputers = (protocol, agentId, data) => {
-    switch (protocol) {
-      case 'snmp':
-        this.agent
-          .execute(
-            this.agent.transfer(
-              agentId,
-              this.agent.snmpScan(data.network, data.community)
-            )
-          )
-          .then(({ commandAnswer: { result } }) => {
-            const computers = this.state.computers;
-
-            for (const [ip, snmp] of Object.entries(result)) {
-              if (ip in computers) {
-                computers[ip].snmp = snmp;
-              } else {
-                computers[ip] = { snmp };
-              }
-            }
-
-            this.setState({ ...this.state, computers });
-          });
-
-        break;
-
-      default:
-        console.log('Default case');
-        break;
-    }
-  };
-
   render() {
-    if (Object.keys(this.state.computers).length !== 0) {
-      console.log(this.state.computers);
-    }
-
+    const { agents } = this.props;
     return (
       <CardBody>
         <Form className="form-material">
@@ -80,7 +38,7 @@ export default class NetworkScan extends Component {
             <Input
               type="select"
               innerRef={this.protocolRef}
-              // onChange={e => this.setState({ selectedProtocol: e.target.value })}
+              onChange={e => this.setState({ selectedProtocol: e.target.value })}
             >
               {PROTOCOLS.map((protocol, i) => {
                 return (
@@ -96,9 +54,9 @@ export default class NetworkScan extends Component {
             <Input
               type="select"
               innerRef={this.agentIdRef}
-              // onChange={e => this.setState({ selectedAgentId: e.target.value })}
+              onChange={e => this.setState({ selectedAgentId: e.target.value })}
             >
-              {this.state.otherAgents.map((agentId, i) => {
+              {agents.map((agentId, i) => {
                 return (
                   <option key={i} value={agentId}>
                     {agentId}
@@ -147,7 +105,7 @@ export default class NetworkScan extends Component {
               const protocol = this.protocolRef.current.value;
               const agentId = this.agentIdRef.current.value;
               const { selectedData } = this.state;
-              this.searchComputers(protocol, agentId, selectedData);
+              this.props.searchComputers(protocol, agentId, selectedData);
               console.log('Scanning...');
             }}
           >
@@ -170,3 +128,18 @@ export default class NetworkScan extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  computers: state.computer.computers,
+  agents: state.agent.agents
+});
+
+NetworkScan.propTypes = {
+  searchComputers: PropTypes.func.isRequired,
+  findAgents: PropTypes.func.isRequired
+};
+
+export default connect(
+  mapStateToProps,
+  { searchComputers, findAgents }
+)(NetworkScan);

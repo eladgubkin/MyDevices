@@ -1,65 +1,104 @@
 import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-import * as data from './data.json';
-import { CardBody } from 'reactstrap';
+import { CardBody, Button } from 'reactstrap';
+import { msToTime } from '../../utils/msToTime';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class Table extends Component {
-  msToTime = duration => {
-    // eslint-disable-next-line
-    var milliseconds = parseInt((duration % 1000) / 100, 10),
-      seconds = parseInt((duration / 1000) % 60, 10),
-      minutes = parseInt((duration / (1000 * 60)) % 60, 10),
-      hours = parseInt((duration / (1000 * 60 * 60)) % 24, 10);
+  constructor(props) {
+    super(props);
+    this.state = {
+      computers: {}
+    };
+  }
 
-    hours = hours < 10 ? '0' + hours : hours;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    seconds = seconds < 10 ? '0' + seconds : seconds;
-
-    return hours + ':' + minutes + ':' + seconds;
-  };
+  componentWillReceiveProps(newProps) {
+    const computers = this.state.computers;
+    for (const [ip, snmp] of Object.entries(newProps.computers)) {
+      if (ip in computers) {
+        computers[ip].snmp = snmp;
+      } else {
+        computers[ip] = { snmp };
+      }
+    }
+    this.setState({ ...this.state, computers });
+  }
 
   render() {
+    const data = Object.keys(this.state.computers).map(ip => {
+      return {
+        name: this.state.computers[ip].snmp.name,
+        ip: ip,
+        // eslint-disable-next-line
+        mac: this.state.computers[ip].snmp.interfaces.map(doc => {
+          if (doc.description === 'wl0') {
+            return doc.mac;
+          }
+        }),
+        uptime: msToTime(this.state.computers[ip].snmp.uptime),
+        description: this.state.computers[ip].snmp.description,
+        actions: (
+          <div className="text-center">
+            <Button
+              onClick={() => {
+                alert('hi');
+              }}
+              color="inverse"
+              size="sm"
+              round="true"
+              icon="true"
+            >
+              <i className="mdi mdi-map-marker-plus" />
+            </Button>
+          </div>
+        )
+      };
+    });
+
     return (
       <CardBody style={{ height: 'calc(100vh - 277px)' }}>
         <ReactTable
-          data={data.map(doc => {
-            return {
-              name: doc.name,
-              ip: doc.ip,
-              alive: doc.alive ? 'Alive' : 'Dead',
-              uptime: this.msToTime(doc.uptime),
-              ping: doc.ping
-            };
-          })}
+          data={data}
           columns={[
             {
+              accessor: 'actions',
+              sortable: false,
+              filterable: false,
+              width: 50
+            },
+            {
               Header: 'Name',
-              accessor: 'name'
+              accessor: 'name',
+              minWidth: 150
             },
             {
-              Header: 'IP',
-              accessor: 'ip'
+              Header: 'IP Address',
+              accessor: 'ip',
+              minWidth: 150
             },
             {
-              Header: 'Status',
-              accessor: 'alive'
+              Header: 'Mac Address',
+              accessor: 'mac',
+              minWidth: 150
             },
             {
               Header: 'UpTime',
-              accessor: 'uptime'
+              accessor: 'uptime',
+              minWidth: 150
             },
             {
-              Header: 'Ping',
-              accessor: 'ping'
+              Header: 'Description',
+              accessor: 'description',
+              width: 420
             }
           ]}
-          defaultPageSize={data.length}
+          pageSize={data.length}
           showPagination={false}
           showPageSizeOptions={false}
           showPaginationTop={false}
           showPaginationBottom={false}
-          filterable
           style={{
             height: '100%',
             width: '100%'
@@ -71,4 +110,15 @@ class Table extends Component {
   }
 }
 
-export default Table;
+const mapStateToProps = state => ({
+  computers: state.computer.computers
+});
+
+Table.propTypes = {
+  computers: PropTypes.object.isRequired
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(Table);

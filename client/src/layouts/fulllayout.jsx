@@ -5,14 +5,15 @@ import Sidebar from '../components/sidebar/sidebar.jsx';
 import RightPanel from '../components/rightPanel/RightPanel';
 // import Footer from '../components/footer/footer.jsx';
 import ThemeRoutes from '../routes/routing.jsx';
+import Agent from '../utils/agent';
+import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
 
 class Fulllayout extends React.Component {
-  /*--------------------------------------------------------------------------------*/
-  /*Change the layout settings [HEADER,SIDEBAR && DARK LAYOUT] from here            */
-  /*--------------------------------------------------------------------------------*/
   constructor(props) {
     super(props);
     this.updateDimensions = this.updateDimensions.bind(this);
+    this.agent = new Agent();
     this.state = {
       isOpen: false,
       width: window.innerWidth,
@@ -30,6 +31,8 @@ class Fulllayout extends React.Component {
           logobg: 'skin1'
         }
       ]
+      // otherAgents: [],
+      // computers: {}
     };
 
     this.props.history.listen((location, action) => {
@@ -62,6 +65,39 @@ class Fulllayout extends React.Component {
     window.addEventListener('load', this.updateDimensions);
     window.addEventListener('resize', this.updateDimensions);
   }
+
+  // searchComputers = (protocol, agentId, data) => {
+  //   switch (protocol) {
+  //     case 'snmp':
+  //       this.agent
+  //         .execute(
+  //           this.agent.transfer(
+  //             agentId,
+  //             this.agent.snmpScan(data.network, data.community)
+  //           )
+  //         )
+  //         .then(({ commandAnswer: { result } }) => {
+  //           const computers = this.state.computers;
+
+  //           for (const [ip, snmp] of Object.entries(result)) {
+  //             if (ip in computers) {
+  //               computers[ip].snmp = snmp;
+  //             } else {
+  //               computers[ip] = { snmp };
+  //             }
+  //           }
+
+  //           this.setState({ ...this.state, computers });
+  //         });
+
+  //       break;
+
+  //     default:
+  //       console.log('Default case');
+  //       break;
+  //   }
+  // };
+
   /*--------------------------------------------------------------------------------*/
   /*Function that handles sidebar, changes when resizing App                        */
   /*--------------------------------------------------------------------------------*/
@@ -106,6 +142,7 @@ class Fulllayout extends React.Component {
     window.removeEventListener('load', this.updateDimensions);
     window.removeEventListener('resize', this.updateDimensions);
   }
+
   render() {
     return (
       <div
@@ -120,9 +157,7 @@ class Fulllayout extends React.Component {
       >
         <Header data={this.state} darkTheme={this.darkTheme} />
         <Sidebar data={this.state} {...this.props} routes={ThemeRoutes} />
-        {/*--------------------------------------------------------------------------------*/}
-        {/* Page Main-Content                                                              */}
-        {/*--------------------------------------------------------------------------------*/}
+
         <div className="page-wrapper d-block">
           <div className="page-content container-fluid">
             <Switch>
@@ -162,18 +197,17 @@ class Fulllayout extends React.Component {
           </div>
           {/* <Footer /> */}
         </div>
-        <RightPanel
-          darkTheme={this.darkTheme}
-          boxedTheme={this.boxedTheme}
-          rtl={this.rtl}
-          headerPosition={this.headerPosition}
-          sidebarPosition={this.sidebarPosition}
-          navbarbgChange={this.navbarbgChange}
-          sidebarbgChange={this.sidebarbgChange}
-          logobgChange={this.logobgChange}
-        />
+        <RightPanel />
       </div>
     );
   }
 }
-export default Fulllayout;
+
+const mapStateToProps = state => ({});
+
+Fulllayout.propTypes = {};
+
+export default connect(
+  mapStateToProps,
+  {}
+)(Fulllayout);
