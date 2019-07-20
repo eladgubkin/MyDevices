@@ -7,6 +7,8 @@ import * as types from './types';
 import Agent from '../../../utils/agent';
 const agent = new Agent();
 
+window.agent = agent;
+
 const findAgents = () => dispatch => {
   // Every 2 seconds
   setInterval(() => {

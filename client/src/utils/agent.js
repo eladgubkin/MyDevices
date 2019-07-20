@@ -7,6 +7,8 @@ export const PING = 2;
 export const TCP_SCAN = 3;
 export const SNMP_SCAN = 4;
 
+// TODO: put access_token in the constructor()
+// agent.execute(agent.transfer('178a924c-448d-46ac-b7c4-5c937b524386', agent.ping(['172.21.12.0', '172.21.12.1', '8.8.8.8', '192.168.100.100']))).then((x) => console.log(x))
 export default class Agent {
   constructor() {
     this.ws = new WebSocket('ws://localhost:8000/web?access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1NjM2MzQyOTd9.WQNFdKbpGJcXc33laRCMCsgnVJaVwoR6hBBQ48ocQ_I');
