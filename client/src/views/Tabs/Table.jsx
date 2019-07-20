@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { CardBody, Button } from 'reactstrap';
-import { msToTime } from '../../utils/msToTime';
+import { timeFormat } from '../../utils/timeFormat';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -37,7 +37,8 @@ class Table extends Component {
             return doc.mac;
           }
         }),
-        uptime: msToTime(this.state.computers[ip].snmp.uptime),
+        location: this.state.computers[ip].snmp.location,
+        uptime: timeFormat(this.state.computers[ip].snmp.uptime),
         description: this.state.computers[ip].snmp.description,
         actions: (
           <div className="text-center">
@@ -84,9 +85,14 @@ class Table extends Component {
               minWidth: 150
             },
             {
+              Header: 'Location',
+              accessor: 'location',
+              minWidth: 150
+            },
+            {
               Header: 'UpTime',
               accessor: 'uptime',
-              minWidth: 150
+              minWidth: 250
             },
             {
               Header: 'Description',
@@ -94,7 +100,7 @@ class Table extends Component {
               width: 420
             }
           ]}
-          pageSize={data.length}
+          pageSize={data.length === 0 ? 0 : data.length}
           showPagination={false}
           showPageSizeOptions={false}
           showPaginationTop={false}
@@ -111,11 +117,13 @@ class Table extends Component {
 }
 
 const mapStateToProps = state => ({
-  computers: state.computer.computers
+  computers: state.computer.computers,
+  currentTheme: state.settings.currentTheme
 });
 
 Table.propTypes = {
-  computers: PropTypes.object.isRequired
+  computers: PropTypes.object.isRequired,
+  currentTheme: PropTypes.string.isRequired
 };
 
 export default connect(
