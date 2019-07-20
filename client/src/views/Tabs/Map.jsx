@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { CardBody } from 'reactstrap';
 // import L from 'leaflet';
 // import { Map as M, ImageOverlay } from 'react-leaflet';
-import ImageMapper from 'react-image-mapper';
+// import ImageMapper from 'react-image-mapper';
 import map from '../../assets/map.jpg';
 
 class Map extends Component {
   render() {
     return (
       <CardBody style={{ height: 'calc(100vh - 277px)' }}>
-        <ImageMapper src={map} />
+        <img src={map} alt="map" width="100%" height="100%" />
         {/* <M
           center={[1117, 2225]}
           zoom={-1.2}
