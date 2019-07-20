@@ -12,7 +12,7 @@ async def handle_command(ws):
 
 
 async def agent():
-    async with websockets.connect('ws://localhost:8000/agent') as ws:
+    async with websockets.connect('ws://localhost:8000/agent?access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1NjM2MzQyOTd9.WQNFdKbpGJcXc33laRCMCsgnVJaVwoR6hBBQ48ocQ_I') as ws:
         print('Agent ID:', json.loads(await ws.recv())['agentId'])
 
         while True:

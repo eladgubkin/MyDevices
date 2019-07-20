@@ -9,7 +9,7 @@ export const SNMP_SCAN = 4;
 
 export default class Agent {
   constructor() {
-    this.ws = new WebSocket('ws://localhost:8000/web');
+    this.ws = new WebSocket('ws://localhost:8000/web?access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1NjM2MzQyOTd9.WQNFdKbpGJcXc33laRCMCsgnVJaVwoR6hBBQ48ocQ_I');
     this.ws.onmessage = this.onMessage;
     this.pendingCommands = {};
     this.agentId = null;

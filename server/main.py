@@ -6,13 +6,60 @@ from cnc.ping_command import PingCommand
 from cnc.command_factory import CommandFactory, CommandAnswerFactory
 from server.agent import Agent
 from server.agent_manager import AgentManager
+from sanic.exceptions import abort
+from sanic.response import json
+from server.models import db, User
+from sanic_jwt import Initialize
+import bcrypt
+from sanic_jwt.decorators import protected, inject_user
 
 app = Sanic()
 
+app.config.DB_HOST = 'localhost'
+app.config.DB_USER = 'postgres'
+app.config.DB_PASSWORD = '123456'
+app.config.DB_DATABASE = 'mydevices'
+
+db.init_app(app)
 agent_manager = AgentManager()
 
+from sanic_jwt import exceptions
+
+async def authenticate(request, *args, **kwargs):
+    username = request.json.get("username", None)
+    password = request.json.get("password", None)
+
+    if not username or not password:
+        raise exceptions.AuthenticationFailed("Missing username or password.")
+
+    user = await User.query.where(User.username == username).gino.first()
+    if user is None or not bcrypt.checkpw(password.encode('utf-8'), bytes(user.password, 'ascii')):
+        raise exceptions.AuthenticationFailed("Authentication failed.")
+
+    return { 'user_id': user.id }
+
+
+async def retrieve_user(request, payload, *args, **kwargs):
+    if not payload:
+        return None
+
+    user_id = payload.get('user_id', None)
+    return await User.get(user_id)
+
+Initialize(app, authenticate=authenticate, retrieve_user=retrieve_user, query_string_set=True)
+
+
+@app.route("/test")
+@protected()
+@inject_user()
+async def test(request, user):
+    return json({"user": user.username})
+
+
 @app.websocket('/web')
-async def web_handler(request, ws):
+@protected()
+@inject_user()
+async def web_handler(request, ws, user):
     agent = Agent(ws)
     # agent_manager.add_agent(agent)
 
@@ -31,7 +78,9 @@ async def web_handler(request, ws):
 
 
 @app.websocket('/agent')
-async def agent_handler(request, ws):
+@protected()
+@inject_user()
+async def agent_handler(request, ws, user):
     agent = Agent(ws)
     agent_manager.add_agent(agent)
 
