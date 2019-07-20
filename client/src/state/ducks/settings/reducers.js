@@ -6,7 +6,8 @@ Based on the state shape, multiple reducers might be defined in this file, combi
 import * as types from './types';
 
 const initState = {
-  currentTab: '1'
+  currentTab: '1',
+  currentTheme: 'dark'
 };
 
 const settings = (state = initState, action) => {
@@ -14,6 +15,11 @@ const settings = (state = initState, action) => {
     case types.CHANGE_TAB:
       return {
         currentTab: action.payload.tab
+      };
+
+    case types.CHANGE_THEME:
+      return {
+        currentTheme: action.payload.theme
       };
 
     default:

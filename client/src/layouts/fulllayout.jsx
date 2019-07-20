@@ -6,8 +6,9 @@ import RightPanel from '../components/rightPanel/RightPanel';
 // import Footer from '../components/footer/footer.jsx';
 import ThemeRoutes from '../routes/routing.jsx';
 import Agent from '../utils/agent';
+import { changeTheme } from '../state/ducks/settings/actions';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 class Fulllayout extends React.Component {
   constructor(props) {
@@ -31,8 +32,6 @@ class Fulllayout extends React.Component {
           logobg: 'skin1'
         }
       ]
-      // otherAgents: [],
-      // computers: {}
     };
 
     this.props.history.listen((location, action) => {
@@ -50,10 +49,12 @@ class Fulllayout extends React.Component {
     if (a.target.checked) {
       let darktheme = JSON.parse(JSON.stringify(this.state.settings));
       darktheme[0].theme = 'dark';
+      this.props.changeTheme(darktheme[0].theme);
       this.setState({ settings: darktheme });
     } else {
       let lighttheme = JSON.parse(JSON.stringify(this.state.settings));
       lighttheme[0].theme = 'light';
+      this.props.changeTheme(lighttheme[0].theme);
       this.setState({ settings: lighttheme });
     }
   };
@@ -65,39 +66,6 @@ class Fulllayout extends React.Component {
     window.addEventListener('load', this.updateDimensions);
     window.addEventListener('resize', this.updateDimensions);
   }
-
-  // searchComputers = (protocol, agentId, data) => {
-  //   switch (protocol) {
-  //     case 'snmp':
-  //       this.agent
-  //         .execute(
-  //           this.agent.transfer(
-  //             agentId,
-  //             this.agent.snmpScan(data.network, data.community)
-  //           )
-  //         )
-  //         .then(({ commandAnswer: { result } }) => {
-  //           const computers = this.state.computers;
-
-  //           for (const [ip, snmp] of Object.entries(result)) {
-  //             if (ip in computers) {
-  //               computers[ip].snmp = snmp;
-  //             } else {
-  //               computers[ip] = { snmp };
-  //             }
-  //           }
-
-  //           this.setState({ ...this.state, computers });
-  //         });
-
-  //       break;
-
-  //     default:
-  //       console.log('Default case');
-  //       break;
-  //   }
-  // };
-
   /*--------------------------------------------------------------------------------*/
   /*Function that handles sidebar, changes when resizing App                        */
   /*--------------------------------------------------------------------------------*/
@@ -203,11 +171,15 @@ class Fulllayout extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  currentTheme: state.settings.currentTheme
+});
 
-Fulllayout.propTypes = {};
+Fulllayout.propTypes = {
+  currentTheme: PropTypes.string.isRequired
+};
 
 export default connect(
   mapStateToProps,
-  {}
+  { changeTheme }
 )(Fulllayout);

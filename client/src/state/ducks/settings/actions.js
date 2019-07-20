@@ -12,4 +12,11 @@ const changeTab = tab => ({
   }
 });
 
-export { changeTab };
+const changeTheme = theme => ({
+  type: types.CHANGE_THEME,
+  payload: {
+    theme
+  }
+});
+
+export { changeTab, changeTheme };
