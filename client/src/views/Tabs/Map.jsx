@@ -1,28 +1,16 @@
 import React, { Component } from 'react';
 import { CardBody } from 'reactstrap';
-import L from 'leaflet';
-import { Map as M, ImageOverlay } from 'react-leaflet';
+// import L from 'leaflet';
+// import { Map as M, ImageOverlay } from 'react-leaflet';
+import ImageMapper from 'react-image-mapper';
 import map from '../../assets/map.jpg';
 
 class Map extends Component {
-  msToTime = duration => {
-    // eslint-disable-next-line
-    var milliseconds = parseInt((duration % 1000) / 100, 10),
-      seconds = parseInt((duration / 1000) % 60, 10),
-      minutes = parseInt((duration / (1000 * 60)) % 60, 10),
-      hours = parseInt((duration / (1000 * 60 * 60)) % 24, 10);
-
-    hours = hours < 10 ? '0' + hours : hours;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    seconds = seconds < 10 ? '0' + seconds : seconds;
-
-    return hours + ':' + minutes + ':' + seconds;
-  };
-
   render() {
     return (
       <CardBody style={{ height: 'calc(100vh - 277px)' }}>
-        <M
+        <ImageMapper src={map} />
+        {/* <M
           center={[1117, 2225]}
           zoom={-1.2}
           style={{
@@ -40,7 +28,7 @@ class Map extends Component {
           zoomControl={true}
         >
           <ImageOverlay url={map} bounds={[[0, 0], [2234, 4500]]} />
-          {/* 
+          
           {data.map((doc, i) => {
             return (
               <Marker
@@ -59,8 +47,8 @@ class Map extends Component {
                 </Tooltip>
               </Marker>
             );
-          })} */}
-        </M>
+          })}
+        </M> */}
       </CardBody>
     );
   }

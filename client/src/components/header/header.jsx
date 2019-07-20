@@ -13,8 +13,6 @@ import {
   DropdownItem
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
-// import * as data from './data.jsx';
-
 import logodarkicon from '../../assets/images/logo-icon.png';
 import logolighticon from '../../assets/images/logo-light-icon.png';
 import profilephoto from '../../assets/images/users/1.jpg';
