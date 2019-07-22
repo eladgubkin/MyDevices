@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { CardBody } from 'reactstrap';
-// import L from 'leaflet';
-// import { Map as M, ImageOverlay } from 'react-leaflet';
-// import ImageMapper from 'react-image-mapper';
+import L from 'leaflet';
+import { Map as M, ImageOverlay } from 'react-leaflet';
 import map from '../../assets/map.jpg';
 
 class Map extends Component {
   render() {
     return (
-      <CardBody style={{ height: 'calc(100vh - 277px)' }}>
-        <img src={map} alt="map" width="100%" height="100%" />
-        {/* <M
+      <CardBody style={{ height: 'calc(100vh - 278px)' }}>
+        {/* <img src={map} alt="map" width="100%" height="100%" /> */}
+        <M
           center={[1117, 2225]}
           zoom={-1.2}
           style={{
@@ -23,13 +22,13 @@ class Map extends Component {
           crs={L.CRS.Simple}
           minZoom={-2}
           maxZoom={2}
-          maxBounds={[[2234, 0], [0, 2234]]}
+          // maxBounds={[[2234, 0], [0, 2234]]}
           // setView={[1117, 2250]}
           zoomControl={true}
         >
           <ImageOverlay url={map} bounds={[[0, 0], [2234, 4500]]} />
-          
-          {data.map((doc, i) => {
+
+          {/* {data.map((doc, i) => {
             return (
               <Marker
                 key={i}
@@ -47,8 +46,8 @@ class Map extends Component {
                 </Tooltip>
               </Marker>
             );
-          })}
-        </M> */}
+          })} */}
+        </M>
       </CardBody>
     );
   }
