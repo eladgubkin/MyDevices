@@ -5,6 +5,7 @@ import { CardBody, Button } from 'reactstrap';
 import { timeFormat } from '../../utils/timeFormat';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import NoDataComponent from '../../components/common/NoDataComponent';
 
 class Table extends Component {
   constructor(props) {
@@ -59,7 +60,7 @@ class Table extends Component {
     });
 
     return (
-      <CardBody style={{ height: 'calc(100vh - 277px)' }}>
+      <CardBody style={{ height: 'calc(100vh - 278px)' }}>
         <ReactTable
           data={data}
           columns={[
@@ -100,6 +101,8 @@ class Table extends Component {
               width: 420
             }
           ]}
+          filterable
+          NoDataComponent={NoDataComponent}
           pageSize={data.length === 0 ? 0 : data.length}
           showPagination={false}
           showPageSizeOptions={false}
