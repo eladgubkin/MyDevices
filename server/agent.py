@@ -2,7 +2,6 @@ import json
 import uuid
 from cnc.command_factory import CommandAnswerFactory
 
-
 class Agent(object):
     def __init__(self, ws):
         self.id = str(uuid.uuid4())
