@@ -44,3 +44,22 @@ body {
 .sidebar-item {
   cursor: default !important;
 }
+
+.rt-table input {
+  background: transparent !important;
+}
+
+.leaflet-container {
+  z-index: 0;
+}
+
+@media (max-width: 767px) {
+  .page-wrapper > .page-content {
+    padding: 0;
+    height: 100%;
+  }
+
+  .container-fluid {
+    padding: 0;
+  }
+}
