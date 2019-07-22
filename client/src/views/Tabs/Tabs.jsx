@@ -10,7 +10,7 @@ import {
   CardTitle
 } from 'reactstrap';
 import classnames from 'classnames';
-import Overview from './Overview';
+import Overview from './Overview/Overview';
 import Map from './Map';
 import Table from './Table';
 // import { changeTab } from '../../state/ducks/settings/actions';
@@ -43,7 +43,7 @@ class Tabs extends Component {
         </CardTitle>
 
         <CardBody>
-          <Nav tabs>
+          <Nav pills className="custom-pills border-bottom">
             <NavItem>
               <NavLink
                 className={classnames({
@@ -104,7 +104,7 @@ class Tabs extends Component {
               <Table />
             </TabPane>
             <TabPane tabId="4" className="h-100">
-              <CardBody style={{ height: 'calc(100vh - 277px)' }}>
+              <CardBody style={{ height: 'calc(100vh - 278px)' }}>
                 <h4>Graph</h4>
               </CardBody>
             </TabPane>

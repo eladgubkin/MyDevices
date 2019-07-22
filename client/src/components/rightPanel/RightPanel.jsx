@@ -52,7 +52,7 @@ class RightPanel extends React.Component {
           <div className="px-3">
             <Card>
               <CardBody>
-                <Nav tabs>
+                <Nav pills className="custom-pills border-bottom">
                   <NavItem>
                     <NavLink
                       className={classnames({
