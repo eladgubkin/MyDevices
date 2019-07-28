@@ -14,8 +14,7 @@ const NoDataComponent = props => {
         transform: 'translate(-50%, -50%)',
         background: 'transparent',
         zIndex: 1,
-        pointerEvents: 'none',
-        padding: '20px'
+        pointerEvents: 'none'
       }}
     >
       <h3>\(o_o)/</h3>
