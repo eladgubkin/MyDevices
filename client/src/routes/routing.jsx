@@ -16,7 +16,7 @@ var ThemeRoutes = [
   {
     path: '/tabs',
     name: 'Project 1 - Yifat',
-    icon: 'mdi mdi-view-dashboard',
+    icon: 'mdi mdi-label',
     component: Tabs
   },
   {
