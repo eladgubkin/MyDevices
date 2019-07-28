@@ -15,6 +15,7 @@ const searchComputers = (protocol, agentId, data) => dispatch => {
           agent.transfer(agentId, agent.snmpScan(data.network, data.community))
         )
         .then(({ commandAnswer: { result } }) => {
+          console.log(result);
           dispatch({
             type: types.SEARCH_COMPUTERS,
             payload: {
