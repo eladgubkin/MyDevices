@@ -33,24 +33,24 @@ class List extends Component {
     });
 
     return (
-      <div className="list" style={{ overflowY: 'auto' }}>
+      <div className="list" style={{ overflowY: 'auto', minHeight: '450px' }}>
         <ReactTable
           data={data}
           columns={[
             {
               Header: 'Name',
               accessor: 'name',
-              minWidth: 150
+              width: '50%'
             },
             {
               Header: 'IP Address',
               accessor: 'ip',
-              minWidth: 150
+              width: '50%'
             }
           ]}
           filterable
           NoDataComponent={NoDataComponent}
-          pageSize={data.length === 0 ? 0 : data.length}
+          pageSize={data.length === 0 ? 15 : data.length}
           showPagination={false}
           showPageSizeOptions={false}
           showPaginationTop={false}

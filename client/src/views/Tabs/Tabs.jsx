@@ -35,6 +35,14 @@ class Tabs extends Component {
   };
 
   render() {
+    let style;
+
+    if (window.innerWidth < 768) {
+      style = { height: 'calc(100vh - 218px)' };
+    } else {
+      style = { height: 'calc(100vh - 278px)' };
+    }
+
     return (
       <Card className="mb-0">
         <CardTitle className="bg-light border-bottom p-3 mb-0">
@@ -104,7 +112,7 @@ class Tabs extends Component {
               <Table />
             </TabPane>
             <TabPane tabId="4" className="h-100">
-              <CardBody style={{ height: 'calc(100vh - 278px)' }}>
+              <CardBody style={style}>
                 <h4>Graph</h4>
               </CardBody>
             </TabPane>

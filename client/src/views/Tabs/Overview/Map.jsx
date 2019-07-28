@@ -9,6 +9,7 @@ class Map extends Component {
       <div className="map">
         {/* <img src={map} alt={map} /> */}
         <M
+          scrollWheelZoom={true}
           center={[1117, 2225]}
           zoom={-1.2}
           style={{

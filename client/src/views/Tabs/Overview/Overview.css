@@ -33,9 +33,12 @@
 
 #Overview .section .buttons {
   grid-area: buttons;
-  display: flex;
+  /* display: flex;
   justify-content: space-evenly;
-  align-items: center;
+  align-items: center; */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
 }
 
 #Overview .section .graph {
@@ -50,7 +53,7 @@
   height: 100%;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 767px) {
   #Overview {
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -60,10 +63,14 @@
 
   #Overview .section {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 40px auto;
+    grid-template-rows: 450px 80px auto;
     grid-template-areas:
       'map'
       'buttons'
       'graph';
+  }
+
+  #Overview .section .buttons {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

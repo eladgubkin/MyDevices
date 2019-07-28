@@ -28,6 +28,14 @@ class Table extends Component {
   }
 
   render() {
+    let style;
+
+    if (window.innerWidth < 768) {
+      style = { height: 'calc(100vh - 218px)' };
+    } else {
+      style = { height: 'calc(100vh - 278px)' };
+    }
+
     const data = Object.keys(this.state.computers).map(ip => {
       return {
         name: this.state.computers[ip].snmp.name,
@@ -60,7 +68,7 @@ class Table extends Component {
     });
 
     return (
-      <CardBody style={{ height: 'calc(100vh - 278px)' }}>
+      <CardBody style={style}>
         <ReactTable
           data={data}
           columns={[

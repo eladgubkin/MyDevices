@@ -2,21 +2,21 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   Nav,
-  Collapse
-  // Dropdown,
-  // DropdownToggle,
-  // DropdownMenu,
-  // DropdownItem
+  Collapse,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from 'reactstrap';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
-// import profilephoto from '../../assets/images/users/1.jpg';
-// import bgimage from '../../assets/images/background/user-info.jpg';
+import profilephoto from '../../assets/images/users/1.jpg';
+import bgimage from '../../assets/images/background/user-info.jpg';
 
-// const sidebarBackground = {
-//   backgroundImage: 'url(' + bgimage + ')',
-//   backgroundRepeat: 'no-repeat'
-// };
+const sidebarBackground = {
+  backgroundImage: 'url(' + bgimage + ')',
+  backgroundRepeat: 'no-repeat'
+};
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -64,7 +64,7 @@ class Sidebar extends React.Component {
       >
         <div className="scroll-sidebar">
           <PerfectScrollbar className="sidebar-nav">
-            {/* <div className="user-profile" style={sidebarBackground}>
+            <div className="user-profile" style={sidebarBackground}>
               <div className="profile-img">
                 <img src={profilephoto} alt="user" />
               </div>
@@ -77,7 +77,7 @@ class Sidebar extends React.Component {
                       <i className="ti-user" /> My Profile
                     </DropdownItem>
                     <DropdownItem>
-                      <i className="ti-settings" /> Account Setting
+                      <i className="ti-settings" /> Setting
                     </DropdownItem>
                     <DropdownItem>
                       <i className="fa fa-power-off" /> Logout
@@ -85,7 +85,7 @@ class Sidebar extends React.Component {
                   </DropdownMenu>
                 </Dropdown>
               </div>
-            </div> */}
+            </div>
             {/*--------------------------------------------------------------------------------*/}
             {/* Sidebar Menus will go here                                                     */}
             {/*--------------------------------------------------------------------------------*/}

@@ -6,8 +6,16 @@ import map from '../../assets/map.jpg';
 
 class Map extends Component {
   render() {
+    let style;
+
+    if (window.innerWidth < 768) {
+      style = { height: 'calc(100vh - 218px)' };
+    } else {
+      style = { height: 'calc(100vh - 278px)' };
+    }
+
     return (
-      <CardBody style={{ height: 'calc(100vh - 278px)' }}>
+      <CardBody style={style}>
         {/* <img src={map} alt="map" width="100%" height="100%" /> */}
         <M
           center={[1117, 2225]}
