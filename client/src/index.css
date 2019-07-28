@@ -63,3 +63,12 @@ body {
     padding: 0;
   }
 }
+
+#sidebarnav .active {
+  background: #1e88e5 !important;
+}
+
+#sidebarnav .sidebar-link:hover i,
+#sidebarnav .sidebar-link:hover {
+  color: #fff !important;
+}
