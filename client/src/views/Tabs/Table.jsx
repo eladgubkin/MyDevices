@@ -15,62 +15,63 @@ class Table extends Component {
     };
   }
 
-  componentWillReceiveProps(newProps) {
-    const computers = this.state.computers;
-    for (const [ip, snmp] of Object.entries(newProps.computers)) {
-      if (ip in computers) {
-        computers[ip].snmp = snmp;
-      } else {
-        computers[ip] = { snmp };
-      }
-    }
-    this.setState({ ...this.state, computers });
-  }
+  // componentWillReceiveProps(newProps) {
+  //   const computers = this.state.computers;
+  //   for (const [ip, snmp] of Object.entries(newProps.computers)) {
+  //     if (ip in computers) {
+  //       computers[ip].snmp = snmp;
+  //     } else {
+  //       computers[ip] = { snmp };
+  //     }
+  //   }
+  //   this.setState({ ...this.state, computers });
+  // }
 
   render() {
+    console.log(this.props);
     let style;
-
     if (window.innerWidth < 768) {
       style = { height: 'calc(100vh - 218px)' };
     } else {
       style = { height: 'calc(100vh - 278px)' };
     }
 
-    const data = Object.keys(this.state.computers).map(ip => {
-      return {
-        name: this.state.computers[ip].snmp.name,
-        ip: ip,
-        // eslint-disable-next-line
-        mac: this.state.computers[ip].snmp.interfaces.map(doc => {
-          if (doc.description === 'wl0') {
-            return doc.mac;
-          }
-        }),
-        location: this.state.computers[ip].snmp.location,
-        uptime: timeFormat(this.state.computers[ip].snmp.uptime),
-        description: this.state.computers[ip].snmp.description,
-        actions: (
-          <div className="text-center">
-            <Button
-              onClick={() => {
-                alert('hi');
-              }}
-              color="inverse"
-              size="sm"
-              round="true"
-              icon="true"
-            >
-              <i className="mdi mdi-map-marker-plus" />
-            </Button>
-          </div>
-        )
-      };
-    });
+    // const data = Object.keys(this.state.computers).map(ip => {
+    //   return {
+    //     name: this.state.computers[ip].snmp.name,
+    //     ip: ip,
+    //     // eslint-disable-next-line
+    //     mac: this.state.computers[ip].snmp.interfaces.map(doc => {
+    //       if (doc.description === 'wl0') {
+    //         return doc.mac;
+    //       }
+    //     }),
+    //     location: this.state.computers[ip].snmp.location,
+    //     uptime: timeFormat(this.state.computers[ip].snmp.uptime),
+    //     description: this.state.computers[ip].snmp.description,
+    //     actions: (
+    //       <div className="text-center">
+    //         <Button
+    //           onClick={() => {
+    //             alert('hi');
+    //           }}
+    //           color="inverse"
+    //           size="sm"
+    //           round="true"
+    //           icon="true"
+    //         >
+    //           <i className="mdi mdi-map-marker-plus" />
+    //         </Button>
+    //       </div>
+    //     )
+    //   };
+    // });
 
     return (
       <CardBody style={style}>
         <ReactTable
-          data={data}
+          // data={data}
+          data={this.props.computers}
           columns={[
             {
               accessor: 'actions',
@@ -86,6 +87,11 @@ class Table extends Component {
             {
               Header: 'IP Address',
               accessor: 'ip',
+              minWidth: 150
+            },
+            {
+              Header: 'Ping',
+              accessor: 'ping',
               minWidth: 150
             },
             {
@@ -111,11 +117,11 @@ class Table extends Component {
           ]}
           filterable
           NoDataComponent={NoDataComponent}
-          pageSize={data.length === 0 ? 0 : data.length}
-          showPagination={false}
-          showPageSizeOptions={false}
+          // pageSize={data.length === 0 ? 0 : data.length}
+          showPagination={true}
+          showPageSizeOptions={true}
           showPaginationTop={false}
-          showPaginationBottom={false}
+          showPaginationBottom={true}
           style={{
             height: '100%',
             width: '100%'
@@ -133,7 +139,7 @@ const mapStateToProps = state => ({
 });
 
 Table.propTypes = {
-  computers: PropTypes.object.isRequired,
+  computers: PropTypes.array.isRequired,
   currentTheme: PropTypes.string.isRequired
 };
 
