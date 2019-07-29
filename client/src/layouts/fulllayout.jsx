@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Header from '../components/header/header.jsx';
 import Sidebar from '../components/sidebar/sidebar.jsx';
-import RightPanel from '../components/rightPanel/RightPanel';
-// import Footer from '../components/footer/footer.jsx';
+// import RightPanel from '../components/rightPanel/RightPanel';
+import Footer from '../components/footer/footer.jsx';
 import ThemeRoutes from '../routes/routing.jsx';
 import Agent from '../utils/agent';
 import { changeTheme } from '../state/ducks/settings/actions';
@@ -163,9 +163,9 @@ class Fulllayout extends React.Component {
               })}
             </Switch>
           </div>
-          {/* <Footer /> */}
+          <Footer />
         </div>
-        <RightPanel />
+        {/* <RightPanel /> */}
       </div>
     );
   }
