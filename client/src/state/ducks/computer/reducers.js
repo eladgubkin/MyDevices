@@ -6,7 +6,7 @@ Based on the state shape, multiple reducers might be defined in this file, combi
 import * as types from './types';
 
 const initState = {
-  computers: {}
+  computers: []
 };
 
 const computer = (state = initState, action) => {
