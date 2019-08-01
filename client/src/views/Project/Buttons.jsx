@@ -1,5 +1,7 @@
 import React from 'react';
 import { Col, Row, Card, Button, CardBody } from 'reactstrap';
+import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
 import SNMPModal from './SNMPModal';
 import TCPModal from './TCPModal';
 
@@ -88,4 +90,11 @@ class Buttons extends React.Component {
   }
 }
 
-export default Buttons;
+const mapStateToProps = state => ({});
+
+Buttons.propTypes = {};
+
+export default connect(
+  mapStateToProps,
+  null
+)(Buttons);
