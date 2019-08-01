@@ -10,18 +10,15 @@ const agent = new Agent();
 window.agent = agent;
 
 const findAgents = () => dispatch => {
-  // Every 2 seconds
-  setInterval(() => {
-    agent.execute(agent.getAgents()).then(({ agents }) => {
-      dispatch({
-        type: types.FIND_AGENTS,
-        payload: {
-          agents: agents.filter(agentId => agentId !== agent.getAgentId())
-        }
-      });
-      // console.log(agents);
+  agent.execute(agent.getAgents()).then(({ agents }) => {
+    dispatch({
+      type: types.FIND_AGENTS,
+      payload: {
+        agents: agents.filter(agentId => agentId !== agent.getAgentId())
+      }
     });
-  }, 2000);
+    // console.log(agents);
+  });
 };
 
 export { findAgents };
