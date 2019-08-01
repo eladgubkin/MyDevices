@@ -6,10 +6,10 @@ import Table from './Table.jsx';
 import Map from '../../views/Tabs/Map';
 import Feeds from './feeds/feeds';
 import Visitors from './visitors';
-// import ProgressCards from './progress-cards';
+import ProgressCards from './progress-cards';
 import Buttons from './Buttons';
 import { findAgents } from '../../state/ducks/agent/actions';
-import RevenueCards from './revenue-cards';
+// import RevenueCards from './revenue-cards';
 import NewsleterCompaign from './newsleter-compaign/newsleter-compaign';
 import CardBandwidth from './card-bandwidth';
 import CardDownload from './card-download';
@@ -21,14 +21,16 @@ class Project extends Component {
   }
 
   componentDidMount() {
-    this.props.findAgents();
+    setInterval(() => {
+      this.props.findAgents();
+    }, 2000);
   }
 
   render() {
     return (
       <div>
-        {/* <ProgressCards /> */}
-        <RevenueCards />
+        <ProgressCards />
+        {/* <RevenueCards /> */}
 
         <Row>
           <Col xl="7" lg="7">
