@@ -6,6 +6,7 @@ HINT: Always use functions for consistency, don't export plain objects
 import * as types from './types';
 import Agent from '../../../utils/agent';
 import { timeFormat } from '../../../utils/timeFormat';
+import { dbComputers } from './db';
 const agent = new Agent();
 
 const searchComputers = (protocol, agentId, data) => dispatch => {
@@ -16,36 +17,47 @@ const searchComputers = (protocol, agentId, data) => dispatch => {
           agent.transfer(agentId, agent.snmpScan(data.network, data.community))
         )
         .then(({ commandAnswer: { result } }) => {
-          const computers = result;
-          // Ping
+          const foundComputersObj = result;
+
           agent
             .execute(agent.transfer(agentId, agent.ping(data.network)))
             .then(({ commandAnswer: { result } }) => {
-              const ping = result;
+              const foundPingObj = result;
 
-              const info = [];
+              const foundComputersArr = [];
 
-              for (const [ip] of Object.entries(computers)) {
-                info.push({
+              for (const [ip] of Object.entries(foundComputersObj)) {
+                foundComputersArr.push({
+                  name: foundComputersObj[ip].name,
                   ip: ip,
-                  ping: ping[ip],
-                  uptime: timeFormat(computers[ip].uptime),
-                  description: computers[ip].description,
-                  location: computers[ip].location,
-                  name: computers[ip].name,
-                  interfaces: computers[ip].interfaces,
-                  // eslint-disable-next-line
-                  mac: computers[ip].interfaces.map(doc => {
-                    if (doc.description === 'wl0') {
-                      return doc.mac;
-                    }
-                  })
+                  mac: foundComputersObj[ip].interfaces.find(
+                    item => item.description === 'eth0.4'
+                  ).mac,
+                  ping: foundPingObj[ip] + 'ms',
+                  uptime: timeFormat(foundComputersObj[ip].uptime),
+                  description: foundComputersObj[ip].description,
+                  location: foundComputersObj[ip].location,
+                  interfaces: foundComputersObj[ip].interfaces
                 });
               }
+
+              const macs = new Set([dbComputers].map(d => d.mac));
+              const noDupComputers = [
+                ...dbComputers,
+                ...foundComputersArr.filter(d => !macs.has(d.mac))
+              ];
+
+              foundComputersArr.reduce((a, b) => {
+                let a1 = noDupComputers.find(e => e.mac === b.mac) || {};
+                return a.concat(Object.assign(a1, b));
+              }, []);
+
+              // dbComputers = noDupComputers;
+
               dispatch({
                 type: types.SEARCH_COMPUTERS,
                 payload: {
-                  computers: info
+                  computers: noDupComputers
                 }
               });
             });
@@ -59,6 +71,31 @@ const searchComputers = (protocol, agentId, data) => dispatch => {
   }
 };
 
-const pingComputers = (network, agentId) => {};
+const pingComputers = (network, agentId, computers) => dispatch => {
+  agent
+    .execute(agent.transfer(agentId, agent.ping(network)))
+    .then(({ commandAnswer: { result } }) => {
+      const pings = [];
+
+      Object.entries(result).map(obj => {
+        return pings.push({
+          ip: obj[0],
+          ping: obj[1] + 'ms'
+        });
+      });
+
+      computers = computers.map(item => {
+        let item2 = pings.find(i2 => i2.ip === item.ip);
+        return item2 ? { ...item, ...item2 } : item;
+      });
+
+      dispatch({
+        type: types.UPDATE_COMPUTERS_PING,
+        payload: {
+          computers: computers
+        }
+      });
+    });
+};
 
 export { searchComputers, pingComputers };
