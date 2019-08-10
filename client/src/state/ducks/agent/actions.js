@@ -5,19 +5,25 @@ HINT: Always use functions for consistency, don't export plain objects
 
 import * as types from './types';
 import Agent from '../../../utils/agent';
-const agent = new Agent();
 
-window.agent = agent;
+if (!window.agent) {
+  window.agent = new Agent();
+}
+
+const agent = window.agent;
 
 const findAgents = () => dispatch => {
-  agent.execute(agent.getAgents()).then(({ agents }) => {
-    dispatch({
-      type: types.FIND_AGENTS,
-      payload: {
-        agents: agents.filter(agentId => agentId !== agent.getAgentId())
-      }
+  return new Promise((resolve, reject) => {
+    agent.execute(agent.getAgents()).then(({ agents }) => {
+      dispatch({
+        type: types.FIND_AGENTS,
+        payload: {
+          agents: agents.filter(agentId => agentId !== agent.getAgentId())
+        }
+      });
+      resolve();
+      // console.log(agents);
     });
-    // console.log(agents);
   });
 };
 

@@ -4,10 +4,11 @@ Based on the state shape, multiple reducers might be defined in this file, combi
 */
 
 import * as types from './types';
-import { dbComputers } from './db';
+import _ from 'lodash';
+
 
 const initState = {
-  computers: dbComputers
+  computers: []
 };
 
 const computer = (state = initState, action) => {
@@ -15,48 +16,19 @@ const computer = (state = initState, action) => {
     case types.SEARCH_COMPUTERS:
       return {
         ...state,
-        computers: [...state.computers, ...action.payload.computers].reduce(
-          (acc, current) => {
-            const x = acc.find(item => item.mac === current.mac);
-            if (!x) {
-              return acc.concat([current]);
-            } else {
-              return acc;
-            }
-          },
-          []
-        )
-        // computers: action.payload.computers
+        computers: _.values(_.merge(
+          _.mapValues(_.groupBy(state.computers, 'ip'), v => v[0]),
+          _.mapValues(_.groupBy(action.payload.computers, 'ip'), v => v[0]),
+        )),
       };
 
     case types.UPDATE_COMPUTERS_PING:
-      // console.log(
-      //   action.payload.computers.reduce((a, b) => {
-      //     let a1 = state.computers.find(e => e.mac === b.mac) || {};
-      //     return a.concat(Object.assign(a1, b));
-      //   }, [])
-      // );
-
-      // console.log(
-      //   action.payload.computers.reduce((a, b) => {
-      //     let a1 = state.computers.find(e => e.mac === b.mac) || {};
-      //     return a.concat(Object.assign(a1, b));
-      //   }, [])
-      // );
-
-      // .reduce((a, b) => {
-      //   let a1 = state.computers.find(e => e.mac === b.mac) || {};
-      //   return a.concat(Object.assign(a1, b));
-      // }, [])
-
-      // const macs = new Set([state.computers].map(d => d.mac));
-
       return {
         ...state,
-        computers: action.payload.computers.reduce((a, b) => {
-          let a1 = state.computers.find(e => e.mac === b.mac) || {};
-          return a.concat(Object.assign(a1, b));
-        }, [])
+        computers: _.map(state.computers, computer => ({
+          ...computer,
+          ping: action.ipToTime[computer.ip] || computer.ping,
+        })),
       };
 
     default:

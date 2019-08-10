@@ -42,29 +42,37 @@ class Table extends Component {
   };
 
   componentDidMount = () => {
-    setInterval(() => {
-      if (!isEmpty(this.props.computers) && !isEmpty(this.props.agents)) {
-        const network = [];
+    this.refreshPing();
+  };
 
-        this.props.computers.map(computer => {
-          return network.push(computer.ip);
-        });
+  refreshPing = () => {
+    if (isEmpty(this.props.computers) ||
+        isEmpty(this.props.agents)) {
+      setTimeout(this.refreshPing, 3000);
+      return;
+    }
 
-        const agentId = this.props.agents[0];
-        const time = new Date();
+    const network = [];
 
-        console.log(
-          time.getHours() +
-            ':' +
-            time.getMinutes() +
-            ':' +
-            time.getSeconds() +
-            ' Pinging servers...'
-        );
+    this.props.computers.map(computer => {
+      return network.push(computer.ip);
+    });
 
-        this.props.pingComputers(network, agentId, this.props.computers);
-      }
-    }, 60000);
+    const agentId = this.props.agents[0];
+    const time = new Date();
+
+    console.log(
+      time.getHours() +
+        ':' +
+        time.getMinutes() +
+        ':' +
+        time.getSeconds() +
+        ' Pinging servers...'
+    );
+
+    this.props.pingComputers(network, agentId, this.props.computers).then(() => {
+      setTimeout(this.refreshPing, 3000);
+    });
   };
 
   render() {
@@ -130,7 +138,7 @@ class Table extends Component {
                 accessor: 'ping',
                 minWidth: 100,
                 Cell: e => {
-                  const ping = Number(e.value.substring(0, e.value.length - 2));
+                  const ping = e.value;
                   if (ping < 100) {
                     return (
                       <div
@@ -140,7 +148,7 @@ class Table extends Component {
                           height: '100%'
                         }}
                       >
-                        {e.value}
+                        {e.value}ms
                       </div>
                     );
                   }
@@ -153,7 +161,7 @@ class Table extends Component {
                           height: '100%'
                         }}
                       >
-                        {e.value}
+                        {e.value}ms
                       </div>
                     );
                   } else {
@@ -165,7 +173,7 @@ class Table extends Component {
                           height: '100%'
                         }}
                       >
-                        {e.value}
+                        {e.value}ms
                       </div>
                     );
                   }
