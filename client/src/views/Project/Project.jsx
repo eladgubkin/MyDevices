@@ -9,10 +9,12 @@ import Visitors from './visitors';
 import ProgressCards from './progress-cards';
 import Buttons from './Buttons';
 import { findAgents } from '../../state/ducks/agent/actions';
+import { getComputers } from '../../state/ducks/computer/actions';
 // import RevenueCards from './revenue-cards';
 import NewsleterCompaign from './newsleter-compaign/newsleter-compaign';
 import CardBandwidth from './card-bandwidth';
 import CardDownload from './card-download';
+
 
 class Project extends Component {
   constructor(props) {
@@ -21,9 +23,14 @@ class Project extends Component {
   }
 
   componentDidMount() {
-    setInterval(() => {
-      this.props.findAgents();
-    }, 2000);
+    this.props.getComputers();
+    this.refreshAgents();
+  }
+
+  refreshAgents = () => {
+    this.props.findAgents().then(() => {
+      setTimeout(this.refreshAgents, 2000);
+    });
   }
 
   render() {
@@ -68,10 +75,11 @@ class Project extends Component {
 const mapStateToProps = state => ({});
 
 Project.propTypes = {
-  findAgents: PropTypes.func.isRequired
+  findAgents: PropTypes.func.isRequired,
+  getComputers: PropTypes.func.isRequired
 };
 
 export default connect(
   mapStateToProps,
-  { findAgents }
+  { findAgents, getComputers }
 )(Project);
