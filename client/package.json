@@ -14,6 +14,7 @@
     "joi-validation-strategy": "^0.3.3",
     "jwt-decode": "^2.2.0",
     "leaflet": "^1.5.1",
+    "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "namor": "^1.1.1",
     "node-sass": "^4.10.0",
