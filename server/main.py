@@ -71,8 +71,10 @@ async def web_handler(request, ws):
         while True:
             command = CommandFactory().deserialize(await agent.receive())
             answer = await command.execute(agent_manager)
-
-            await agent.send(answer.serialize())
+            if answer is None:
+                print('WARNING: answer is none')
+            else:
+                await agent.send(answer.serialize())
     finally:
         agent_manager.remove_agent(agent)
 
