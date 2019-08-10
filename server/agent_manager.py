@@ -12,4 +12,5 @@ class AgentManager(object):
         self.agents[agent.id] = agent
 
     def remove_agent(self, agent):
-        del self.agents[agent.id]
+        if agent.id in self.agents:
+            del self.agents[agent.id]
