@@ -4,6 +4,8 @@ from cnc.get_agents_command import GetAgentsCommand, GetAgentsCommandAnswer
 from cnc.ping_command import PingCommand, PingCommandAnswer
 from cnc.tcp_scan_command import TcpScanCommand, TcpScanCommandAnswer
 from cnc.snmp_scan_command import SNMPScanCommand, SNMPScanCommandAnswer
+from cnc.save_computers_command import SaveComputersCommand, SaveComputersCommandAnswer
+from cnc.get_computers_command import GetComputersCommand, GetComputersCommandAnswer
 
 COMMANDS = {
     CommandType.TRANSFER: (TransferCommand, TransferCommandAnswer),
@@ -11,6 +13,8 @@ COMMANDS = {
     CommandType.PING: (PingCommand, PingCommandAnswer),
     CommandType.TCP_SCAN: (TcpScanCommand, TcpScanCommandAnswer),
     CommandType.SNMP_SCAN: (SNMPScanCommand, SNMPScanCommandAnswer),
+    CommandType.SAVE_COMPUTERS: (SaveComputersCommand, SaveComputersCommandAnswer),
+    CommandType.GET_COMPUTERS: (GetComputersCommand, GetComputersCommandAnswer),
 }
 
 class CommandFactory(object):

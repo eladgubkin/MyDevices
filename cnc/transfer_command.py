@@ -4,6 +4,9 @@ from cnc.command import Command, CommandType, CommandAnswer
 from cnc.settings import DEFAULT_POOL_PROCSESES
 
 
+TOTAL_MISSES = 5
+
+
 class TransferCommand(Command):
     def __init__(self, command_id, agent_id, command):
         super(TransferCommand, self).__init__(command_id)
@@ -14,10 +17,20 @@ class TransferCommand(Command):
         from cnc.command_factory import CommandAnswerFactory
         
         agent = agent_manager.get_agent(self.agent_id)
-        await agent.send(self.command.serialize())
 
-        return TransferCommandAnswer(self.command_id,
-            CommandAnswerFactory().deserialize(await agent.receive()))
+        async with agent.lock:
+            await agent.send(self.command.serialize())
+
+            misses = 0
+
+            while misses < TOTAL_MISSES:
+                answer = CommandAnswerFactory().deserialize(await agent.receive())
+                if answer.command_id != self.command.command_id:
+                    print('Missed answer: ', self.command.command_id, ', instead received', answer.command_id)
+                    misses += 1
+                    continue
+
+                return TransferCommandAnswer(self.command_id, answer)
 
     def serialize(self):
         return {

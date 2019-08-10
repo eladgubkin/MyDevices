@@ -7,6 +7,8 @@ class CommandType(Enum):
     PING = 2
     TCP_SCAN = 3
     SNMP_SCAN = 4
+    SAVE_COMPUTERS = 5
+    GET_COMPUTERS = 6
 
 
 class Command(object):
