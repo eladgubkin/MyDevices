@@ -4,7 +4,7 @@ import Project from '../views/Project/Project';
 
 var ThemeRoutes = [
   {
-    path: '/dashboard',
+    path: '/dashboard/',
     name: 'Dashboard',
     icon: 'mdi mdi-view-dashboard',
     component: Dashboard
@@ -14,21 +14,15 @@ var ThemeRoutes = [
     name: 'Projects',
     icon: 'mdi mdi-dots-horizontal'
   },
-  // {
-  //   path: '/tabs',
-  //   name: 'Project 1 - Yifat',
-  //   icon: 'mdi mdi-label',
-  //   component: Tabs
-  // },
   {
-    path: '/project',
+    path: '/project/',
     name: 'Project 1',
     icon: 'mdi mdi-label',
     component: Project
   },
   {
     path: '/',
-    pathTo: '/dashboard',
+    pathTo: '/dashboard/',
     redirect: true
   }
 ];
