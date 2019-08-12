@@ -1,64 +1,80 @@
 import React from 'react';
-import { Card, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardBody } from 'reactstrap';
 // import PerfectScrollbar from 'react-perfect-scrollbar';
 import FeedData from './feeddata';
 
 class Feeds extends React.Component {
   render() {
     return (
-      <Card>
+      <Card style={{ height: '500px' }}>
+        {/* <CardTitle className="bg-light border-bottom p-3 mb-0">Log</CardTitle> */}
         <CardBody>
-          <CardTitle>Feeds</CardTitle>
           <div
             className="feeds scrollable"
-            style={{ height: '232px', overflowY: 'auto' }}
+            style={{ height: '460px', overflowY: 'auto' }}
           >
             {/* <PerfectScrollbar> */}
             <FeedData
               buttoncolor="info"
               iconname="far fa-bell"
               content="You have 4 pending tasks."
-              smtext="5 Aug"
+              smtext="hh:mm:ss"
+            />
+            <FeedData
+              buttoncolor="info"
+              iconname="far fa-bell"
+              content="You have 4 pending tasks."
+              smtext="hh:mm:ss"
+            />
+            <FeedData
+              buttoncolor="info"
+              iconname="far fa-bell"
+              content="You have 4 pending tasks."
+              smtext="hh:mm:ss"
+            />
+            <FeedData
+              buttoncolor="info"
+              iconname="far fa-bell"
+              content="You have 4 pending tasks."
+              smtext="hh:mm:ss"
+            />
+            <FeedData
+              buttoncolor="info"
+              iconname="far fa-bell"
+              content="You have 4 pending tasks."
+              smtext="hh:mm:ss"
+            />
+            <FeedData
+              buttoncolor="info"
+              iconname="far fa-bell"
+              content="You have 4 pending tasks."
+              smtext="hh:mm:ss"
+            />
+            <FeedData
+              buttoncolor="info"
+              iconname="far fa-bell"
+              content="You have 4 pending tasks."
+              smtext="hh:mm:ss"
+            />
+            <FeedData
+              buttoncolor="info"
+              iconname="far fa-bell"
+              content="You have 4 pending tasks."
+              smtext="hh:mm:ss"
+            />
+            <FeedData
+              buttoncolor="info"
+              iconname="far fa-bell"
+              content="You have 4 pending tasks."
+              smtext="hh:mm:ss"
+            />
+            <FeedData
+              buttoncolor="info"
+              iconname="far fa-bell"
+              content="You have 4 pending tasks."
+              smtext="hh:mm:ss"
             />
 
-            <FeedData
-              buttoncolor="success"
-              iconname="ti-server"
-              content="Server #1 overloaded."
-              smtext="12 July"
-            />
-
-            <FeedData
-              buttoncolor="warning"
-              iconname="ti-shopping-cart"
-              content="New order received."
-              smtext="31 May"
-            />
-
-            <FeedData
-              buttoncolor="danger"
-              iconname="ti-user"
-              content="New user registered."
-              smtext="30 May"
-            />
-            <FeedData
-              buttoncolor="danger"
-              iconname="ti-user"
-              content="New user registered."
-              smtext="30 May"
-            />
-            <FeedData
-              buttoncolor="danger"
-              iconname="ti-user"
-              content="New user registered."
-              smtext="30 May"
-            />
-            <FeedData
-              buttoncolor="danger"
-              iconname="ti-user"
-              content="New user registered."
-              smtext="30 May"
-            />
             {/* </PerfectScrollbar> */}
           </div>
         </CardBody>

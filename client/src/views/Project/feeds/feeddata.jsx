@@ -5,22 +5,18 @@ import { Button } from 'reactstrap';
 
 class FeedData extends React.Component {
   render() {
-    const content = <span>{this.props.content}</span>;
-
-    const button = (
-      <Button className={'btn-circle text-white btn btn-' + this.props.buttoncolor}>
-        <i className={'text-white ' + this.props.iconname} />
-      </Button>
-    );
-
-    const smtext = (
-      <span className="text-muted font-12 ml-auto">{this.props.smtext}</span>
-    );
     return (
       <div className="d-flex align-items-center content p-2 mt-2">
-        {button}
-        <div className="ml-2 text-truncate content-text">{content}</div>
-        {smtext}
+        <Button
+          className={'btn-circle text-white btn btn-' + this.props.buttoncolor}
+        >
+          <i className={'text-white ' + this.props.iconname} />
+        </Button>
+
+        <div className="d-flex justify-content-between w-100">
+          <span className="ml-2 text-truncate">{this.props.content}</span>
+          <span className="ml-10 text-muted font-12">{this.props.smtext}</span>
+        </div>
       </div>
     );
   }
