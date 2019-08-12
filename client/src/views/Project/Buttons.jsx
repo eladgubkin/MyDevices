@@ -2,8 +2,8 @@ import React from 'react';
 import { Col, Row, Card, Button, CardBody } from 'reactstrap';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
-import SNMPModal from './SNMPModal';
-import TCPModal from './TCPModal';
+import Snmp from './Snmp';
+import Tcp from './Tcp';
 
 class Buttons extends React.Component {
   constructor(props) {
@@ -43,10 +43,7 @@ class Buttons extends React.Component {
             </CardBody>
           </Card>
         </Col>
-        <SNMPModal
-          isOpen={this.state.snmpModal}
-          snmpModalToggle={this.snmpModalToggle}
-        />
+        <Snmp isOpen={this.state.snmpModal} snmpModalToggle={this.snmpModalToggle} />
 
         <Col md="6" lg="3">
           <Card>
@@ -61,10 +58,7 @@ class Buttons extends React.Component {
             </CardBody>
           </Card>
         </Col>
-        <TCPModal
-          isOpen={this.state.tcpModal}
-          tcpModalToggle={this.tcpModalToggle}
-        />
+        <Tcp isOpen={this.state.tcpModal} tcpModalToggle={this.tcpModalToggle} />
 
         <Col md="6" lg="3">
           <Card>

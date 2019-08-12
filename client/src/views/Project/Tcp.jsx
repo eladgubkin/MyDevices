@@ -13,14 +13,31 @@ import {
 import { searchComputers } from '../../state/ducks/computer/actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import TagsInput from 'react-tagsinput';
+import 'react-tagsinput/react-tagsinput.css';
 
-class TCPModal extends Component {
+class Tcp extends Component {
   constructor(props) {
     super(props);
     this.agentIdRef = React.createRef();
     this.state = {
       network: '172.21.12.0-172.21.12.13',
-      ports: []
+      ports: [
+        '80',
+        '21',
+        '22',
+        '23',
+        '25',
+        '53',
+        '443',
+        '110',
+        '135',
+        '137',
+        '138',
+        '139',
+        '1433',
+        '1434'
+      ]
     };
   }
 
@@ -32,7 +49,14 @@ class TCPModal extends Component {
           <Form className="form-material">
             <FormGroup>
               <Label>Agent</Label>
-              <Input type="select" innerRef={this.agentIdRef}>
+              <Input
+                type="select"
+                innerRef={this.agentIdRef}
+                style={{
+                  fontFamily: 'Source Code Pro',
+                  fontWeight: 'bold'
+                }}
+              >
                 {this.props.agents.map((agentId, i) => {
                   return (
                     <option key={i} value={agentId}>
@@ -53,25 +77,47 @@ class TCPModal extends Component {
                     network: e.target.value
                   })
                 }
+                style={{
+                  fontFamily: 'Source Code Pro',
+                  fontWeight: 'bold'
+                }}
               />
             </FormGroup>
             <FormGroup>
               <Label>Ports</Label>
-              <Input
-                type="text"
-                placeholder="Ports"
+              <TagsInput
                 value={this.state.ports}
-                onChange={e =>
-                  this.setState({
-                    ports: e.target.value
-                  })
-                }
+                onChange={e => {
+                  if (Number(e.slice(-1).pop())) {
+                    this.setState({
+                      ports: e
+                    });
+                  }
+                }}
+                onlyUnique={true}
+                tagProps={{
+                  className: 'react-tagsinput-tag bg-info text-white rounded'
+                }}
+                inputProps={{
+                  placeholder: 'Add a port'
+                }}
               />
             </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="info">Scan</Button>
+          <Button
+            color="info"
+            onClick={() => {
+              const agentId = this.agentIdRef.current.value;
+              const { network, ports } = this.state;
+              this.props.searchComputers('tcp', agentId, { network, ports });
+
+              return this.props.tcpModalToggle();
+            }}
+          >
+            Scan
+          </Button>
           <Button color="secondary" onClick={this.props.tcpModalToggle}>
             Cancel
           </Button>
@@ -85,11 +131,11 @@ const mapStateToProps = state => ({
   agents: state.agent.agents
 });
 
-TCPModal.propTypes = {
+Tcp.propTypes = {
   searchComputers: PropTypes.func.isRequired
 };
 
 export default connect(
   mapStateToProps,
   { searchComputers }
-)(TCPModal);
+)(Tcp);

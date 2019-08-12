@@ -7,23 +7,15 @@ import 'c3/c3.css';
 class Visitors extends React.Component {
   render() {
     return (
-      <Card>
+      <Card style={{ height: '500px' }}>
         <CardBody>
-          <CardTitle>Our Visitors</CardTitle>
-          <CardSubtitle className="mb-3">
-            Different Devices Used to Visit
-          </CardSubtitle>
+          <CardTitle>Server Status</CardTitle>
+          <CardSubtitle className="mb-3">server status</CardSubtitle>
           <Chart
-            style={{ height: '250px', width: '100%' }}
+            style={{ width: '100%' }}
             config={{
               data: {
-                columns: [
-                  ['Other', 30],
-                  ['Desktop', 10],
-                  ['Tablet', 40],
-                  ['Mobile', 50]
-                ],
-
+                columns: [['Down', 30], ['Unknown', 10], ['Up', 60]],
                 type: 'donut',
                 tooltip: {
                   show: true
@@ -33,14 +25,14 @@ class Visitors extends React.Component {
                 label: {
                   show: false
                 },
-                title: 'Our Visitor',
+                title: 'Server Status',
                 width: 20
               },
               legend: {
                 hide: true
               },
               color: {
-                pattern: ['#eceff1', '#745af2', '#26c6da', '#1e88e5']
+                pattern: ['#d9534f', '#ccbe21', '#5cb85c']
               }
             }}
           />
@@ -51,21 +43,21 @@ class Visitors extends React.Component {
         <CardBody>
           <div className="d-flex no-block align-items-center justify-content-center">
             <div>
-              <h6 className="text-info">
+              <h6 style={{ color: '#d9534f' }}>
                 <i className="fa fa-circle font-10 mr-2" />
-                Mobile
+                Down
               </h6>
             </div>
             <div className="ml-3">
-              <h6 className="text-primary">
+              <h6 style={{ color: '#ccbe21' }}>
                 <i className="fa fa-circle font-10 mr-2" />
-                Desktop
+                Unknown
               </h6>
             </div>
             <div className="ml-3">
-              <h6 className="text-success">
+              <h6 style={{ color: '#5cb85c' }}>
                 <i className="fa fa-circle font-10 mr-2" />
-                Tablet
+                Up
               </h6>
             </div>
           </div>

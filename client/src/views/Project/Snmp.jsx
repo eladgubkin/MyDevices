@@ -14,7 +14,7 @@ import { searchComputers, pingComputers } from '../../state/ducks/computer/actio
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-class SNMPModal extends Component {
+class Snmp extends Component {
   constructor(props) {
     super(props);
     this.agentIdRef = React.createRef();
@@ -32,7 +32,14 @@ class SNMPModal extends Component {
           <Form className="form-material">
             <FormGroup>
               <Label>Agent</Label>
-              <Input type="select" innerRef={this.agentIdRef}>
+              <Input
+                type="select"
+                innerRef={this.agentIdRef}
+                style={{
+                  fontFamily: 'Source Code Pro',
+                  fontWeight: 'bold'
+                }}
+              >
                 {this.props.agents.map((agentId, i) => {
                   return (
                     <option key={i} value={agentId}>
@@ -53,6 +60,10 @@ class SNMPModal extends Component {
                     network: e.target.value
                   })
                 }
+                style={{
+                  fontFamily: 'Source Code Pro',
+                  fontWeight: 'bold'
+                }}
               />
             </FormGroup>
             <FormGroup>
@@ -66,6 +77,10 @@ class SNMPModal extends Component {
                     community: e.target.value
                   })
                 }
+                style={{
+                  fontFamily: 'Source Code Pro',
+                  fontWeight: 'bold'
+                }}
               />
             </FormGroup>
           </Form>
@@ -77,7 +92,6 @@ class SNMPModal extends Component {
               const agentId = this.agentIdRef.current.value;
               const { network, community } = this.state;
               this.props.searchComputers('snmp', agentId, { network, community });
-              console.log('Scanning...');
 
               return this.props.snmpModalToggle();
             }}
@@ -97,7 +111,7 @@ const mapStateToProps = state => ({
   agents: state.agent.agents
 });
 
-SNMPModal.propTypes = {
+Snmp.propTypes = {
   searchComputers: PropTypes.func.isRequired,
   pingComputers: PropTypes.func.isRequired
 };
@@ -105,4 +119,4 @@ SNMPModal.propTypes = {
 export default connect(
   mapStateToProps,
   { searchComputers, pingComputers }
-)(SNMPModal);
+)(Snmp);

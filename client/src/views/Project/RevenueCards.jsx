@@ -16,8 +16,8 @@ class RevenueCards extends React.Component {
                   <i className="ti-wallet" />
                 </div>
                 <div className="ml-2 align-self-center">
-                  <h3 className="mb-0 font-light">$3249</h3>
-                  <h5 className="text-muted mb-0">Total Revenue</h5>
+                  <h3 className="mb-0 font-light">3249</h3>
+                  <h5 className="text-muted mb-0">Total Servers</h5>
                 </div>
               </div>
             </CardBody>
@@ -32,8 +32,8 @@ class RevenueCards extends React.Component {
                   <i className="mdi mdi-cellphone-link" />
                 </div>
                 <div className="ml-2 align-self-center">
-                  <h3 className="mb-0 font-lgiht">$2376</h3>
-                  <h5 className="text-muted mb-0">Online Revenue</h5>
+                  <h3 className="mb-0 font-lgiht">2376</h3>
+                  <h5 className="text-muted mb-0">Up</h5>
                 </div>
               </div>
             </CardBody>
@@ -48,8 +48,8 @@ class RevenueCards extends React.Component {
                   <i className="mdi mdi-cart-outline" />
                 </div>
                 <div className="ml-2 align-self-center">
-                  <h3 className="mb-0 font-lgiht">$1795</h3>
-                  <h5 className="text-muted mb-0">Offline Revenue</h5>
+                  <h3 className="mb-0 font-lgiht">1795</h3>
+                  <h5 className="text-muted mb-0">Down</h5>
                 </div>
               </div>
             </CardBody>
@@ -64,8 +64,8 @@ class RevenueCards extends React.Component {
                   <i className="mdi mdi-bullseye" />
                 </div>
                 <div className="ml-2 align-self-center">
-                  <h3 className="mb-0 font-lgiht">$687</h3>
-                  <h5 className="text-muted mb-0">Ad. Expense</h5>
+                  <h3 className="mb-0 font-lgiht">687</h3>
+                  <h5 className="text-muted mb-0">Unknown</h5>
                 </div>
               </div>
             </CardBody>
