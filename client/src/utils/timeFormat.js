@@ -6,8 +6,8 @@ export const timeFormat = secs => {
   seconds -= hrs * 3600;
   var mnts = Math.floor(seconds / 60);
   seconds -= mnts * 60;
-  // return days + ' days, ' + hrs + ' hours and ' + mnts + ' Minutes';
-  return `${days} ${days === 1 ? 'day,' : 'days,'} 
-          ${hrs} ${hrs === 1 ? 'hour and' : 'hours and'} 
-          ${mnts} ${mnts === 1 ? 'minute' : 'minutes'}`;
+  // return `${days} ${days === 1 ? 'day,' : 'days,'}
+  //         ${hrs} ${hrs === 1 ? 'hour and' : 'hours and'}
+  //         ${mnts} ${mnts === 1 ? 'minute' : 'minutes'}`;
+  return `${days}:${hrs}:${mnts}`;
 };
