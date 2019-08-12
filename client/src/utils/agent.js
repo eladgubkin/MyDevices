@@ -9,11 +9,6 @@ export const SNMP_SCAN = 4;
 export const SAVE_COMPUTERS = 5;
 export const GET_COMPUTERS = 6;
 
-// TODO: put access_token in the constructor()
-// agent.execute(agent.transfer('178a924c-448d-46ac-b7c4-5c937b524386', agent.ping(['172.21.12.0', '172.21.12.1', '8.8.8.8', '192.168.100.100']))).then((x) => console.log(x))
-
-// ?access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1NjM2MzQyOTd9.WQNFdKbpGJcXc33laRCMCsgnVJaVwoR6hBBQ48ocQ_I
-
 export default class Agent {
   constructor() {
     this.ws = new WebSocket('ws://localhost:8000/web');
@@ -25,14 +20,14 @@ export default class Agent {
 
   getAgentId = () => this.agentId;
 
-  setCurrentCommand = (currentCommand) => {
+  setCurrentCommand = currentCommand => {
     this.currentCommand = currentCommand;
-  }
+  };
 
   getCurrentCommand = () => this.currentCommand;
 
   execute = command => {
-    return new Promise((resolve, reject) => {  
+    return new Promise((resolve, reject) => {
       if (!this.getCurrentCommand()) {
         this.setCurrentCommand({ resolve, reject, command });
 
@@ -45,16 +40,23 @@ export default class Agent {
     });
   };
 
-  handleCurrentCommandAnswer = (data) => {
+  handleCurrentCommandAnswer = data => {
     if (!this.getCurrentCommand()) {
-      console.warn('Received command answer from the server while we did not wait for one.');
+      console.warn(
+        'Received command answer from the server while we did not wait for one.'
+      );
       return;
     }
 
+    // eslint-disable-next-line
     const { resolve, reject, command } = this.getCurrentCommand();
     if (command.commandId !== data.commandId) {
-      console.warn('Invalid answer received from the server. Was expecting', command.commandId, 
-        'but received', data.commandId);
+      console.warn(
+        'Invalid answer received from the server. Was expecting',
+        command.commandId,
+        'but received',
+        data.commandId
+      );
       return;
     }
 
@@ -68,7 +70,7 @@ export default class Agent {
     // Handle the first message
     if (!this.agentId && data.agentId) {
       this.agentId = data.agentId;
-      
+
       if (this.getCurrentCommand()) {
         console.log('Sending', this.getCurrentCommand().command.commandId);
         this.ws.send(JSON.stringify(this.getCurrentCommand().command));
@@ -139,13 +141,13 @@ export default class Agent {
       commandId: uuidv4(),
       type: SAVE_COMPUTERS,
       computers
-    }
+    };
   }
 
   getComputers() {
     return {
       commandId: uuidv4(),
-      type: GET_COMPUTERS,
-    }
+      type: GET_COMPUTERS
+    };
   }
 }
