@@ -3,7 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-import { Card, CardBody, CardTitle } from 'reactstrap';
+import {
+  Card,
+  CardBody,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownMenu
+} from 'reactstrap';
 import NoDataComponent from '../../components/common/NoDataComponent';
 import { pingComputers } from '../../state/ducks/computer/actions';
 import isEmpty from '../../utils/is-empty';
@@ -46,8 +53,7 @@ class Table extends Component {
   };
 
   refreshPing = () => {
-    if (isEmpty(this.props.computers) ||
-        isEmpty(this.props.agents)) {
+    if (isEmpty(this.props.computers) || isEmpty(this.props.agents)) {
       setTimeout(this.refreshPing, 3000);
       return;
     }
@@ -59,16 +65,6 @@ class Table extends Component {
     });
 
     const agentId = this.props.agents[0];
-    const time = new Date();
-
-    console.log(
-      time.getHours() +
-        ':' +
-        time.getMinutes() +
-        ':' +
-        time.getSeconds() +
-        ' Pinging servers...'
-    );
 
     this.props.pingComputers(network, agentId, this.props.computers).then(() => {
       setTimeout(this.refreshPing, 3000);
@@ -78,10 +74,10 @@ class Table extends Component {
   render() {
     return (
       <Card>
-        <CardTitle className="bg-light border-bottom p-3 mb-0">
-          <i className="mdi mdi-border-right mr-2" onClick={this.pingComputers} />
+        {/* <CardTitle className="bg-light border-bottom p-3 mb-0">
+          <i className="mdi mdi-border-right mr-2" />
           Table
-        </CardTitle>
+        </CardTitle> */}
         <CardBody>
           <ReactTable
             data={this.props.computers}
@@ -131,10 +127,43 @@ class Table extends Component {
               {
                 Header: 'IP Address',
                 accessor: 'ip',
-                minWidth: 150
+                minWidth: 150,
+                Cell: e => (
+                  <UncontrolledDropdown
+                    style={{
+                      position: 'static',
+                      outline: 0
+                    }}
+                  >
+                    <DropdownToggle
+                      tag="button"
+                      type="button"
+                      caret
+                      className="dropdownToggle"
+                    >
+                      {e.value}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <a href={`http://${e.value}`} target="_blank">
+                        <DropdownItem className="DropdownItem">
+                          HTTP {e.value}
+                        </DropdownItem>
+                      </a>
+                      <a href={`https://${e.value}`} target="_blank">
+                        <DropdownItem className="DropdownItem">
+                          HTTPS {e.value}
+                        </DropdownItem>
+                      </a>
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
+                )
               },
               {
-                Header: 'Ping',
+                Header: () => (
+                  <div>
+                    Ping <span className="text-muted small-text">ms</span>
+                  </div>
+                ),
                 accessor: 'ping',
                 minWidth: 100,
                 Cell: e => {
@@ -148,7 +177,7 @@ class Table extends Component {
                           height: '100%'
                         }}
                       >
-                        {e.value}ms
+                        {e.value}
                       </div>
                     );
                   }
@@ -156,12 +185,12 @@ class Table extends Component {
                     return (
                       <div
                         style={{
-                          color: '#FFA500',
+                          color: '#ccbe21',
                           width: '100%',
                           height: '100%'
                         }}
                       >
-                        {e.value}ms
+                        {e.value}
                       </div>
                     );
                   } else {
@@ -173,7 +202,7 @@ class Table extends Component {
                           height: '100%'
                         }}
                       >
-                        {e.value}ms
+                        {e.value}
                       </div>
                     );
                   }
@@ -190,25 +219,42 @@ class Table extends Component {
                 minWidth: 150
               },
               {
-                Header: 'UpTime',
+                Header: () => (
+                  <div>
+                    Uptime <span className="text-muted small-text">dd:hh:mm</span>
+                  </div>
+                ),
                 accessor: 'uptime',
-                minWidth: 300
+                minWidth: 200
               },
               {
-                Header: 'Description',
-                accessor: 'description',
-                width: 450
+                Header: () => (
+                  <div>
+                    Download <span className="text-muted small-text">Mbps</span>
+                  </div>
+                ),
+                accessor: 'download',
+                minWidth: 150
+              },
+              {
+                Header: () => (
+                  <div>
+                    Upload <span className="text-muted small-text">Mbps</span>
+                  </div>
+                ),
+                accessor: 'upload',
+                minWidth: 150
               }
             ]}
             style={{
-              height: '500px',
+              height: '687px',
               width: '100%',
               fontFamily: 'Source Code Pro',
               fontWeight: 'bold'
             }}
             filterable
             NoDataComponent={NoDataComponent}
-            pageSize={10}
+            pageSize={15}
             showPagination={true}
             showPageSizeOptions={false}
             pageSizeOptions={[5, 10, 20, 25]}
@@ -217,7 +263,10 @@ class Table extends Component {
               return row[id] !== undefined
                 ? String(row[id].toLowerCase()).startsWith(
                     filter.value.toLowerCase()
-                  )
+                  ) ||
+                    String(row[filter.id])
+                      .toLowerCase()
+                      .includes(filter.value.toLowerCase())
                 : true;
             }}
             className="-highlight"
