@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 class Newsdata extends React.Component {
   render() {
     const texttitle = (
-      <h1 className="mb-0 font-light">{this.props.texttitle}</h1>
+      <h1 className="mb-0 font-light" style={{ fontSize: '1.5rem' }}>
+        {this.props.texttitle}
+      </h1>
     );
     const textsubtitle = <small>{this.props.textsubtitle}</small>;
     return (
