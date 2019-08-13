@@ -115,6 +115,10 @@ const pingComputers = (network, agentId) => dispatch => {
   });
 };
 
+const saveComputers = computers => dispatch => {
+  agent.execute(agent.saveComputers(JSON.stringify(computers)));
+};
+
 const getComputers = () => dispatch => {
   return new Promise(resolve => {
     agent.execute(agent.getComputers()).then(({ computers }) => {
@@ -129,17 +133,32 @@ const getComputers = () => dispatch => {
   });
 };
 
-const saveComputers = computers => dispatch => {
-  agent
-    .execute(agent.saveComputers(JSON.stringify(computers)))
-    .then(({ computers }) => {
-      dispatch({
-        type: types.SEARCH_COMPUTERS,
-        payload: {
-          computers
-        }
+const deleteComputers = comps => dispatch => {
+  return new Promise(resolve => {
+    // dispatch({
+    //   type: types.UPDATE_COMPUTERS_AFTER_DELETE,
+    //   payload: {
+    //     computers: comps
+    //   }
+    // });
+    agent.execute(agent.deleteComputers(JSON.stringify(comps))).then(() => {
+      agent.execute(agent.getComputers()).then(({ computers }) => {
+        dispatch({
+          type: types.UPDATE_COMPUTERS_AFTER_DELETE,
+          payload: {
+            computers: JSON.parse(computers)
+          }
+        });
       });
     });
+    resolve();
+  });
 };
 
-export { searchComputers, pingComputers, getComputers, saveComputers };
+export {
+  searchComputers,
+  pingComputers,
+  getComputers,
+  saveComputers,
+  deleteComputers
+};
