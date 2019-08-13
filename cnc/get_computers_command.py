@@ -2,20 +2,20 @@ import pythonping
 from multiprocessing import Pool
 from cnc.command import Command, CommandType, CommandAnswer
 from cnc.settings import DEFAULT_POOL_PROCSESES
-
+from cnc.models import db, Computer
+import asyncpg
 
 class GetComputersCommand(Command):
     def __init__(self, command_id):
         super(GetComputersCommand, self).__init__(command_id)
 
     async def execute(self, agent_manager):
-        try: 
-            with open(r'computers.db', 'r') as computers_db:
-                computers = computers_db.read()
-        except IOError:
+        try:
+            computers = await Computer.query.gino.all()
+        except asyncpg.exceptions.UndefinedTableError:
             computers = '[]'
-            
-        return GetComputersCommandAnswer(self.command_id, computers)
+        
+        return GetComputersCommandAnswer(self.command_id, str(computers))
 
     def serialize(self):
         return {
