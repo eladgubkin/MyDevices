@@ -31,7 +31,8 @@ class Sidebar extends React.Component {
       iconsPages: this.activeRoute('/icons') !== '' ? true : false,
       formlayoutPages: this.activeRoute('/form-layouts') !== '' ? true : false,
       formpickerPages: this.activeRoute('/form-pickers') !== '' ? true : false,
-      dropdownOpen: false
+      dropdownOpen: false,
+      modal: false
     };
     this.toggle = this.toggle.bind(this);
   }
@@ -40,6 +41,13 @@ class Sidebar extends React.Component {
       dropdownOpen: !prevState.dropdownOpen
     }));
   }
+
+  toggleModal = () => {
+    this.setState({
+      modal: !this.state.modal
+    });
+  };
+
   /*--------------------------------------------------------------------------------*/
   /*To Expand SITE_LOGO With Sidebar-Menu on Hover                                  */
   /*--------------------------------------------------------------------------------*/
@@ -232,6 +240,32 @@ class Sidebar extends React.Component {
                 }
               })}
             </Nav>
+            {/* <ul id="sidebar-nav" className="nav" onClick={this.toggleModal}>
+              <a className="sidebar-link active">
+                <i className="fas fa-pencil-alt" />
+                <span className="hide-menu">Add a project</span>
+              </a>
+            </ul>
+            <Modal isOpen={this.state.modal} toggle={this.toggleModal} fade={false}>
+              <ModalHeader toggle={this.toggleModal}>Modal title</ModalHeader>
+              <ModalBody>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                culpa qui officia deserunt mollit anim id est laborum.
+              </ModalBody>
+              <ModalFooter>
+                <Button color="primary" onClick={this.toggleModal}>
+                  Do Something
+                </Button>
+                <Button color="secondary" onClick={this.toggleModal}>
+                  Cancel
+                </Button>
+              </ModalFooter>
+            </Modal> */}
           </PerfectScrollbar>
         </div>
       </aside>
