@@ -6,6 +6,7 @@ from cnc.tcp_scan_command import TcpScanCommand, TcpScanCommandAnswer
 from cnc.snmp_scan_command import SNMPScanCommand, SNMPScanCommandAnswer
 from cnc.save_computers_command import SaveComputersCommand, SaveComputersCommandAnswer
 from cnc.get_computers_command import GetComputersCommand, GetComputersCommandAnswer
+from cnc.delete_computers_command import DeleteComputersCommand, DeleteComputersCommandAnswer
 
 COMMANDS = {
     CommandType.TRANSFER: (TransferCommand, TransferCommandAnswer),
@@ -15,6 +16,7 @@ COMMANDS = {
     CommandType.SNMP_SCAN: (SNMPScanCommand, SNMPScanCommandAnswer),
     CommandType.SAVE_COMPUTERS: (SaveComputersCommand, SaveComputersCommandAnswer),
     CommandType.GET_COMPUTERS: (GetComputersCommand, GetComputersCommandAnswer),
+    CommandType.DELETE_COMPUTERS: (DeleteComputersCommand, DeleteComputersCommandAnswer),
 }
 
 class CommandFactory(object):
