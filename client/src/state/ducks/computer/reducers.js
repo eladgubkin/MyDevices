@@ -27,6 +27,12 @@ const computer = (state = initState, action) => {
         }))
       };
 
+    case types.UPDATE_COMPUTERS_AFTER_DELETE:
+      return {
+        ...state,
+        computers: action.payload.computers
+      };
+
     default:
       return state;
   }
