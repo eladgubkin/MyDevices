@@ -9,7 +9,7 @@ class CommandType(Enum):
     SNMP_SCAN = 4
     SAVE_COMPUTERS = 5
     GET_COMPUTERS = 6
-
+    DELETE_COMPUTERS = 7
 
 class Command(object):
     def __init__(self, command_id):
