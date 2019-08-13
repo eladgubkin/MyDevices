@@ -114,7 +114,7 @@ class Header extends React.Component {
                 <img src={logodarkicon} alt="homepage" className="dark-logo" />
                 <img src={logolighticon} alt="homepage" className="light-logo" />
               </b>
-              <span className="logo-text">Home Page</span>
+              <span className="logo-text">MyDevices3</span>
             </NavbarBrand>
 
             {/*--------------------------------------------------------------------------------*/}
