@@ -9,10 +9,12 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownItem,
-  DropdownMenu
+  DropdownMenu,
+  CardTitle,
+  Button
 } from 'reactstrap';
 import NoDataComponent from '../../components/common/NoDataComponent';
-import { pingComputers } from '../../state/ducks/computer/actions';
+import { pingComputers, deleteComputers } from '../../state/ducks/computer/actions';
 import isEmpty from '../../utils/is-empty';
 
 class Table extends Component {
@@ -24,9 +26,9 @@ class Table extends Component {
     };
   }
 
-  toggleRow = name => {
+  toggleRow = mac => {
     const newSelected = Object.assign({}, this.state.selected);
-    newSelected[name] = !this.state.selected[name];
+    newSelected[mac] = !this.state.selected[mac];
     this.setState({
       selected: newSelected,
       selectAll: 2
@@ -38,7 +40,7 @@ class Table extends Component {
 
     if (this.state.selectAll === 0) {
       this.props.computers.forEach(x => {
-        newSelected[x.name] = true;
+        newSelected[x.mac] = true;
       });
     }
 
@@ -74,10 +76,31 @@ class Table extends Component {
   render() {
     return (
       <Card>
-        {/* <CardTitle className="bg-light border-bottom p-3 mb-0">
-          <i className="mdi mdi-border-right mr-2" />
-          Table
-        </CardTitle> */}
+        <CardTitle className="bg-light border-bottom p-3 mb-0 d-flex flex-row">
+          <Button
+            color="danger"
+            size="sm"
+            outline={true}
+            className="mr-3"
+            onClick={() => {
+              const computers = [];
+              this.props.computers.map(computer => {
+                Object.keys(this.state.selected).map(selectedMac => {
+                  if (computer.mac === selectedMac) {
+                    computers.push(computer);
+                  }
+                });
+              });
+
+              this.props.deleteComputers(computers);
+            }}
+          >
+            Delete
+          </Button>
+          <Button color="success" size="sm" outline={true} className="mr-3">
+            Favorite
+          </Button>
+        </CardTitle>
         <CardBody>
           <ReactTable
             data={this.props.computers}
@@ -90,8 +113,8 @@ class Table extends Component {
                     <input
                       type="checkbox"
                       className="checkbox"
-                      checked={this.state.selected[original.name] === true}
-                      onChange={() => this.toggleRow(original.name)}
+                      checked={this.state.selected[original.mac] === true}
+                      onChange={() => this.toggleRow(original.mac)}
                     />
                   );
                 },
@@ -247,7 +270,7 @@ class Table extends Component {
               }
             ]}
             style={{
-              height: '687px',
+              height: '750px',
               width: '100%',
               fontFamily: 'Source Code Pro',
               fontWeight: 'bold'
@@ -287,10 +310,11 @@ const mapStateToProps = state => ({
 Table.propTypes = {
   computers: PropTypes.array.isRequired,
   currentTheme: PropTypes.string.isRequired,
-  pingComputers: PropTypes.func.isRequired
+  pingComputers: PropTypes.func.isRequired,
+  deleteComputers: PropTypes.func.isRequired
 };
 
 export default connect(
   mapStateToProps,
-  { pingComputers }
+  { pingComputers, deleteComputers }
 )(Table);
