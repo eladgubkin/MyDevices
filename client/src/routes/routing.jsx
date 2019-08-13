@@ -1,6 +1,6 @@
-// import Tabs from '../views/Tabs/Tabs';
 import Dashboard from '../views/Dashboard/Dashboard';
 import Project from '../views/Project/Project';
+// import Edit from '../views/Project/Edit';
 
 var ThemeRoutes = [
   {
@@ -17,7 +17,7 @@ var ThemeRoutes = [
   {
     path: '/project/',
     name: 'Project 1',
-    icon: 'mdi mdi-label',
+    icon: 'mdi mdi-label-outline',
     component: Project
   },
   {
