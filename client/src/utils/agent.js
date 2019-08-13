@@ -8,6 +8,7 @@ export const TCP_SCAN = 3;
 export const SNMP_SCAN = 4;
 export const SAVE_COMPUTERS = 5;
 export const GET_COMPUTERS = 6;
+export const DELETE_COMPUTERS = 7;
 
 export default class Agent {
   constructor() {
@@ -148,6 +149,14 @@ export default class Agent {
     return {
       commandId: uuidv4(),
       type: GET_COMPUTERS
+    };
+  }
+
+  deleteComputers(computers) {
+    return {
+      commandId: uuidv4(),
+      type: DELETE_COMPUTERS,
+      computers
     };
   }
 }
