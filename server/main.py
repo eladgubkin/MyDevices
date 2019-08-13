@@ -1,29 +1,28 @@
 import asyncio
-from sanic import Sanic
-from sanic.response import html
 from json import loads as json_load, dumps as json_dump
 from cnc.ping_command import PingCommand
 from cnc.command_factory import CommandFactory, CommandAnswerFactory
 from server.agent import Agent
 from server.agent_manager import AgentManager
+from sanic import Sanic
 from sanic.exceptions import abort
 from sanic.response import json
+from cnc.models import db
 # from server.models import db, User
 # from sanic_jwt import Initialize
 # import bcrypt
 # from sanic_jwt.decorators import protected, inject_user
 
 app = Sanic()
+app.config.DB_HOST = 'localhost'
+app.config.DB_DATABASE = 'mydevices'
+app.config.DB_USER = 'postgres'
+app.config.DB_PASSWORD = '123456'
+db.init_app(app)
 
-# app.config.DB_HOST = 'localhost'
-# app.config.DB_USER = 'postgres'
-# app.config.DB_PASSWORD = '123456'
-# app.config.DB_DATABASE = 'mydevices'
-
-# db.init_app(app)
 agent_manager = AgentManager()
 
-from sanic_jwt import exceptions
+# from sanic_jwt import exceptions
 
 # async def authenticate(request, *args, **kwargs):
 #     username = request.json.get("username", None)
@@ -55,7 +54,13 @@ from sanic_jwt import exceptions
 # async def test(request, user):
 #     return json({"user": user.username})
 
+async def connect_to_db():
+    await db.set_bind('postgresql://postgres:123456@localhost/mydevices')
 
+    # await User.create(username='elad', password=
+    #     bcrypt.hashpw('123456'.encode('utf-8'), bcrypt.gensalt()).decode('ascii'))
+
+    
 @app.websocket('/web')
 # @protected()
 # @inject_user()
@@ -98,3 +103,4 @@ async def agent_handler(request, ws):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
+    asyncio.get_event_loop().run_until_complete(connect_to_db())
