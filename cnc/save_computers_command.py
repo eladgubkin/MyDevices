@@ -2,7 +2,10 @@ import pythonping
 from multiprocessing import Pool
 from cnc.command import Command, CommandType, CommandAnswer
 from cnc.settings import DEFAULT_POOL_PROCSESES
-
+from cnc.models import db, Computer
+import json
+import uuid
+import asyncpg
 
 class SaveComputersCommand(Command):
     def __init__(self, command_id, computers):
@@ -10,8 +13,32 @@ class SaveComputersCommand(Command):
         self.computers = computers
 
     async def execute(self, agent_manager):
-        with open(r'computers.db', 'w') as computers_db:
-            computers_db.write(self.computers)
+        computers = json.loads(self.computers)
+        await db.gino.create_all()
+        
+        for computer in computers:
+            try:
+                await Computer.create(
+                    name=computer['name'],
+                    ip=computer['ip'],
+                    ping=computer['ping'],
+                    mac=computer['mac'],
+                    location=computer['location'],
+                    uptime=computer['uptime'],
+                    download=computer['download'],
+                    upload=computer['upload']
+                    )
+            except asyncpg.exceptions.UniqueViolationError:
+                existing_computer = await Computer.get(computer['mac'])
+            
+                await existing_computer.update(
+                    name=computer['name'],
+                    ip=computer['ip'],
+                    ping=computer['ping'],
+                    location=computer['location'],
+                    uptime=computer['uptime'],
+                    download=computer['download'],
+                    upload=computer['upload']).apply()
 
         return SaveComputersCommandAnswer(self.command_id)
 
