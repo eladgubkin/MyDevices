@@ -27,7 +27,7 @@ const computer = (state = initState, action) => {
         }))
       };
 
-    case types.UPDATE_COMPUTERS_AFTER_DELETE:
+    case types.UPDATE_TABLE:
       return {
         ...state,
         computers: action.payload.computers
