@@ -11,18 +11,25 @@ import {
   DropdownItem,
   DropdownMenu,
   CardTitle,
-  Button
+  Button,
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup
 } from 'reactstrap';
 import NoDataComponent from '../../components/common/NoDataComponent';
 import { pingComputers, deleteComputers } from '../../state/ducks/computer/actions';
 import isEmpty from '../../utils/is-empty';
+import _ from 'lodash';
+import Pagination from './Pagination';
 
 class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selected: {},
-      selectAll: 0
+      selectAll: 0,
+      search: ''
     };
   }
 
@@ -74,36 +81,89 @@ class Table extends Component {
   };
 
   render() {
+    let data = this.props.computers;
+    if (this.state.search) {
+      data = data.filter(row => {
+        return (
+          String(row.name)
+            .toLowerCase()
+            .includes(this.state.search.toLowerCase()) ||
+          String(row.ip)
+            .toLowerCase()
+            .includes(this.state.search.toLowerCase()) ||
+          String(row.ping)
+            .toLowerCase()
+            .includes(this.state.search.toLowerCase()) ||
+          String(row.mac)
+            .toLowerCase()
+            .includes(this.state.search.toLowerCase()) ||
+          String(row.location)
+            .toLowerCase()
+            .includes(this.state.search.toLowerCase()) ||
+          String(row.uptime)
+            .toLowerCase()
+            .includes(this.state.search.toLowerCase()) ||
+          String(row.download)
+            .toLowerCase()
+            .includes(this.state.search.toLowerCase()) ||
+          String(row.upload)
+            .toLowerCase()
+            .includes(this.state.search.toLowerCase())
+        );
+      });
+    }
+
     return (
       <Card>
         <CardTitle className="bg-light border-bottom p-3 mb-0 d-flex flex-row">
+          <Button color="success" size="sm" outline={true} className="mr-3">
+            Show on map
+          </Button>
           <Button
             color="danger"
             size="sm"
             outline={true}
             className="mr-3"
             onClick={() => {
-              const computers = [];
-              this.props.computers.map(computer => {
-                Object.keys(this.state.selected).map(selectedMac => {
-                  if (computer.mac === selectedMac) {
-                    computers.push(computer);
-                  }
-                });
-              });
-
-              this.props.deleteComputers(computers);
+              var macs = _.keys(_.pickBy(this.state.selected));
+              this.props.deleteComputers(macs, this.props.computers);
             }}
           >
             Delete
           </Button>
-          <Button color="success" size="sm" outline={true} className="mr-3">
-            Favorite
-          </Button>
+          <div
+            style={{
+              display: 'flex',
+              flex: 1
+            }}
+          />
+          <InputGroup
+            style={{
+              maxWidth: '400px',
+              display: 'flex',
+              justifyContent: 'flex-end'
+            }}
+          >
+            <Input
+              style={{
+                fontFamily: 'Source Code Pro',
+                fontWeight: 'bold'
+              }}
+              type="text"
+              placeholder="Search"
+              value={this.state.search}
+              onChange={e => this.setState({ search: e.target.value })}
+            />
+            <InputGroupAddon addonType="append">
+              <InputGroupText>
+                <i className="mdi mdi-magnify" />
+              </InputGroupText>
+            </InputGroupAddon>
+          </InputGroup>
         </CardTitle>
         <CardBody>
           <ReactTable
-            data={this.props.computers}
+            data={data}
             columns={[
               {
                 id: 'checkbox',
@@ -270,28 +330,28 @@ class Table extends Component {
               }
             ]}
             style={{
-              height: '750px',
+              height: '550px',
               width: '100%',
               fontFamily: 'Source Code Pro',
               fontWeight: 'bold'
             }}
-            filterable
             NoDataComponent={NoDataComponent}
-            pageSize={15}
+            pageSize={12}
             showPagination={true}
             showPageSizeOptions={false}
+            PaginationComponent={Pagination}
             pageSizeOptions={[5, 10, 20, 25]}
-            defaultFilterMethod={(filter, row) => {
-              const id = filter.pivotId || filter.id;
-              return row[id] !== undefined
-                ? String(row[id].toLowerCase()).startsWith(
-                    filter.value.toLowerCase()
-                  ) ||
-                    String(row[filter.id])
-                      .toLowerCase()
-                      .includes(filter.value.toLowerCase())
-                : true;
-            }}
+            // defaultFilterMethod={(filter, row) => {
+            //   const id = filter.pivotId || filter.id;
+            //   return row[id] !== undefined
+            //     ? String(row[id].toLowerCase()).startsWith(
+            //         filter.value.toLowerCase()
+            //       ) ||
+            //         String(row[filter.id])
+            //           .toLowerCase()
+            //           .includes(filter.value.toLowerCase())
+            //     : true;
+            // }}
             className="-highlight"
           />
         </CardBody>
