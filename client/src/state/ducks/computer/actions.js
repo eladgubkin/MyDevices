@@ -7,6 +7,7 @@ import * as types from './types';
 import Agent from '../../../utils/agent';
 // import { timeFormat } from '../../../utils/timeFormat';
 import moment from 'moment';
+import _ from 'lodash';
 
 if (!window.agent) {
   window.agent = new Agent();
@@ -133,26 +134,17 @@ const getComputers = () => dispatch => {
   });
 };
 
-const deleteComputers = comps => dispatch => {
-  return new Promise(resolve => {
-    // dispatch({
-    //   type: types.UPDATE_COMPUTERS_AFTER_DELETE,
-    //   payload: {
-    //     computers: comps
-    //   }
-    // });
-    agent.execute(agent.deleteComputers(JSON.stringify(comps))).then(() => {
-      agent.execute(agent.getComputers()).then(({ computers }) => {
-        dispatch({
-          type: types.UPDATE_COMPUTERS_AFTER_DELETE,
-          payload: {
-            computers: JSON.parse(computers)
-          }
-        });
-      });
-    });
-    resolve();
+const deleteComputers = (macs, computers) => dispatch => {
+  dispatch({
+    type: types.UPDATE_TABLE,
+    payload: {
+      computers: _.filter(
+        computers,
+        computer => _.indexOf(macs, computer.mac) === -1
+      )
+    }
   });
+  agent.execute(agent.deleteComputers(JSON.stringify(macs))).then(() => {});
 };
 
 export {
