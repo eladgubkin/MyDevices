@@ -7,17 +7,18 @@ import json
 import asyncpg
 
 class DeleteComputersCommand(Command):
-    def __init__(self, command_id, computers):
+    def __init__(self, command_id, macs):
         super(DeleteComputersCommand, self).__init__(command_id)
-        self.computers = computers
+        self.macs = macs
 
     async def execute(self, agent_manager):
-        computers = json.loads(self.computers)
+        macs = json.loads(self.macs)
         await db.gino.create_all()
         
-        for computer in computers:
-          existing_computer = await Computer.get(computer['mac'])
-          await existing_computer.delete()
+        for mac in macs:
+            existing_computer = await Computer.get(mac)
+            await existing_computer.delete()
+            print(mac + ' Deleted')
 
         return DeleteComputersCommandAnswer(self.command_id)
 
@@ -25,13 +26,13 @@ class DeleteComputersCommand(Command):
         return {
             'commandId': self.command_id,
             'type': CommandType.SAVE_COMPUTERS.value,
-            'computers': self.computers
+            'macs': self.macs
         }
 
     @staticmethod
     def deserialize(data):
         return DeleteComputersCommand(command_id=data['commandId'],
-                                    computers=data['computers'])
+                                    macs=data['computers'])
 
 
 class DeleteComputersCommandAnswer(CommandAnswer):
