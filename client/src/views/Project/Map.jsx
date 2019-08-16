@@ -19,7 +19,7 @@ class Map extends Component {
         {/* <img src={map} alt="map" width="100%" height="100%" /> */}
         <M
           center={[1117, 2225]}
-          zoom={-1.2}
+          zoom={-2}
           style={{
             width: '100%',
             height: '100%',
@@ -28,7 +28,7 @@ class Map extends Component {
             borderRadius: '4px'
           }}
           crs={L.CRS.Simple}
-          minZoom={-2}
+          minZoom={-3}
           maxZoom={2}
           // maxBounds={[[2234, 0], [0, 2234]]}
           // setView={[1117, 2250]}

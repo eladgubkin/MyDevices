@@ -7,7 +7,7 @@ from server.agent_manager import AgentManager
 from sanic import Sanic
 from sanic.exceptions import abort
 from sanic.response import json
-from cnc.models import db
+from server.models import db
 # from server.models import db, User
 # from sanic_jwt import Initialize
 # import bcrypt
@@ -56,10 +56,10 @@ agent_manager = AgentManager()
 
 async def connect_to_db():
     await db.set_bind('postgresql://postgres:123456@localhost/mydevices')
-
+    await db.gino.create_all()
     # await User.create(username='elad', password=
     #     bcrypt.hashpw('123456'.encode('utf-8'), bcrypt.gensalt()).decode('ascii'))
-
+    
     
 @app.websocket('/web')
 # @protected()

@@ -82,33 +82,35 @@ class Table extends Component {
 
   render() {
     let data = this.props.computers;
-    if (this.state.search) {
+    const { search } = this.state;
+
+    if (search) {
       data = data.filter(row => {
         return (
           String(row.name)
             .toLowerCase()
-            .includes(this.state.search.toLowerCase()) ||
+            .includes(search.toLowerCase()) ||
           String(row.ip)
             .toLowerCase()
-            .includes(this.state.search.toLowerCase()) ||
+            .includes(search.toLowerCase()) ||
           String(row.ping)
             .toLowerCase()
-            .includes(this.state.search.toLowerCase()) ||
+            .includes(search.toLowerCase()) ||
           String(row.mac)
             .toLowerCase()
-            .includes(this.state.search.toLowerCase()) ||
+            .includes(search.toLowerCase()) ||
           String(row.location)
             .toLowerCase()
-            .includes(this.state.search.toLowerCase()) ||
+            .includes(search.toLowerCase()) ||
           String(row.uptime)
             .toLowerCase()
-            .includes(this.state.search.toLowerCase()) ||
+            .includes(search.toLowerCase()) ||
           String(row.download)
             .toLowerCase()
-            .includes(this.state.search.toLowerCase()) ||
+            .includes(search.toLowerCase()) ||
           String(row.upload)
             .toLowerCase()
-            .includes(this.state.search.toLowerCase())
+            .includes(search.toLowerCase())
         );
       });
     }

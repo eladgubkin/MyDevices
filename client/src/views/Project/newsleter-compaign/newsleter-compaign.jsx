@@ -9,7 +9,7 @@ let lineData = {
   labels: [1, 2, 3, 4, 5, 6, 7, 8],
   datasets: [
     {
-      label: 'Income',
+      label: 'Download',
       borderWidth: 2,
       backgroundColor: 'rgba(0, 136, 229,.1)',
       borderColor: 'rgb(30, 136, 229)',
@@ -18,7 +18,7 @@ let lineData = {
       data: [0, 5, 6, 8, 20, 7, 8, 12]
     },
     {
-      label: 'Outcome',
+      label: 'Upload',
       borderWidth: 2,
       backgroundColor: 'rgba(79,195,247,.1)',
       borderColor: 'rgb(79,195,247)',
@@ -32,28 +32,25 @@ let lineData = {
 class NewsleterCompaign extends React.Component {
   render() {
     return (
-      /*--------------------------------------------------------------------------------*/
-      /* Used In Dashboard-1,2                                                          */
-      /*--------------------------------------------------------------------------------*/
       <Card>
         <CardBody>
           <div className="d-flex flex-wrap">
             <div>
-              <CardTitle>Newsletter Campaign</CardTitle>
-              <CardSubtitle>Overview of Newsletter Campaign</CardSubtitle>
+              <CardTitle>Download & Upload Speeds</CardTitle>
+              <CardSubtitle>Overview of Download & Upload Speeds</CardSubtitle>
             </div>
             <div className="ml-auto align-self-center">
               <div className="d-flex no-block align-items-center justify-content-center">
                 <div>
                   <h6 className="text-success">
                     <i className="fa fa-circle font-10 mr-2" />
-                    Open Rate
+                    Download
                   </h6>
                 </div>
                 <div className="ml-3">
                   <h6 className="text-info">
                     <i className="fa fa-circle font-10 mr-2" />
-                    Recurring Payments
+                    Upload
                   </h6>
                 </div>
               </div>
@@ -69,14 +66,14 @@ class NewsleterCompaign extends React.Component {
                 options={{
                   maintainAspectRatio: false,
                   legend: {
-                    display: false,
+                    display: true,
                     labels: { fontFamily: 'Poppins' }
                   },
                   scales: {
                     yAxes: [
                       {
                         stacked: true,
-                        gridLines: { display: false },
+                        gridLines: { display: true },
                         ticks: { fontFamily: 'Poppins' }
                       }
                     ],

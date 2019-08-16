@@ -2,7 +2,7 @@ import pythonping
 from multiprocessing import Pool
 from cnc.command import Command, CommandType, CommandAnswer
 from cnc.settings import DEFAULT_POOL_PROCSESES
-from cnc.models import db, Computer
+from server.models import db, Computer
 import json
 import uuid
 import asyncpg
@@ -14,7 +14,6 @@ class SaveComputersCommand(Command):
 
     async def execute(self, agent_manager):
         computers = json.loads(self.computers)
-        await db.gino.create_all()
         
         for computer in computers:
             try:
