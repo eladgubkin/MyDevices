@@ -8,7 +8,6 @@ from sanic import Sanic
 from sanic.exceptions import abort
 from sanic.response import json
 from server.models import db
-# from server.models import db, User
 # from sanic_jwt import Initialize
 # import bcrypt
 # from sanic_jwt.decorators import protected, inject_user
