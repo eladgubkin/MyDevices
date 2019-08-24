@@ -15,9 +15,12 @@ class DeleteComputersCommand(Command):
         macs = json.loads(self.macs)
         
         for mac in macs:
-            existing_computer = await Computer.get(mac)
-            await existing_computer.delete()
-            print(mac + ' Deleted')
+            try:
+                existing_computer = await Computer.get(mac)
+                await existing_computer.delete()
+                print(mac + ' Deleted')
+            except AttributeError:
+                print("'NoneType' object has no attribute 'delete'")
 
         return DeleteComputersCommandAnswer(self.command_id)
 
