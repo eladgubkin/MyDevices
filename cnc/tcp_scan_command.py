@@ -1,8 +1,8 @@
 import socket
 from itertools import product
-from multiprocessing import Pool
 from cnc.command import Command, CommandType, CommandAnswer
 from cnc.ip_utils import parse_network
+from multiprocessing import Pool
 from cnc.settings import DEFAULT_POOL_PROCSESES
 
 def scan_ip(ip, ports):
@@ -25,10 +25,11 @@ class TcpScanCommand(Command):
 
     async def execute(self, agent_manager):
         pool = Pool(DEFAULT_POOL_PROCSESES)
-
         result = pool.starmap(scan_ip, [(ip, self.ports) for ip in parse_network(self.network)])
-        return TcpScanCommandAnswer(self.command_id,
-            dict((pair for pair in result if pair is not None)))
+        pool.close()
+        pool.join()
+        
+        return TcpScanCommandAnswer(self.command_id, dict((pair for pair in result if pair is not None)))
 
     def serialize(self):
         return {

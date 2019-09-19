@@ -1,11 +1,7 @@
 import pythonping
-from multiprocessing import Pool
 from cnc.command import Command, CommandType, CommandAnswer
-from cnc.settings import DEFAULT_POOL_PROCSESES
-
 
 TOTAL_MISSES = 5
-
 
 class TransferCommand(Command):
     def __init__(self, command_id, agent_id, command):

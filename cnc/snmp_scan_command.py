@@ -1,11 +1,10 @@
 import pythonping
 from pysnmp.hlapi import *
-from multiprocessing import Pool
 from cnc.command import Command, CommandType, CommandAnswer
 from cnc.ip_utils import parse_network
+from multiprocessing import Pool
 from cnc.settings import DEFAULT_POOL_PROCSESES
 from cnc.snmp import SNMPEndpoint, NetworkInterface
-from cnc.settings import DEFAULT_POOL_PROCSESES
 
 # Load IF-MIB
 from pysnmp.smi import builder, view, compiler, rfc1902
@@ -79,8 +78,12 @@ class SNMPScanCommand(Command):
 
     async def execute(self, agent_manager): 
         pool = Pool(DEFAULT_POOL_PROCSESES)
+        result = pool.map(snmp_scan, parse_network(self.network))
+        pool.close()
+        pool.join()
+        
         return SNMPScanCommandAnswer(self.command_id, 
-            dict(item for item in pool.map(snmp_scan, parse_network(self.network)) if item is not None))
+            dict(item for item in result if item is not None))
 
     def serialize(self):
         return {

@@ -1,7 +1,7 @@
 import pythonping
-from multiprocessing import Pool
 from cnc.command import Command, CommandType, CommandAnswer
 from cnc.ip_utils import parse_network
+from multiprocessing import Pool
 from cnc.settings import DEFAULT_POOL_PROCSESES
 
 def ping(ip):
@@ -15,8 +15,11 @@ class PingCommand(Command):
 
     async def execute(self, agent_manager):
         pool = Pool(DEFAULT_POOL_PROCSESES)
-        return PingCommandAnswer(self.command_id, 
-            dict(pool.map(ping, parse_network(self.network))))
+        result = pool.map(ping, parse_network(self.network))
+        pool.close()
+        pool.join()
+
+        return PingCommandAnswer(self.command_id, dict(result))
 
     def serialize(self):
         return {
