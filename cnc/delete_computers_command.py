@@ -11,7 +11,6 @@ class DeleteComputersCommand(Command):
 
     async def execute(self, agent_manager):
         macs = json.loads(self.macs)
-        
         for mac in macs:
             try:
                 existing_computer = await Computer.get(mac)
