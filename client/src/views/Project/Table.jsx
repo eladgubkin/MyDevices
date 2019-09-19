@@ -63,7 +63,7 @@ class Table extends Component {
 
   refreshPing = () => {
     if (isEmpty(this.props.computers) || isEmpty(this.props.agents)) {
-      setTimeout(this.refreshPing, 3000);
+      setTimeout(this.refreshPing, 15000);
       return;
     }
 
@@ -76,7 +76,7 @@ class Table extends Component {
     const agentId = this.props.agents[0];
 
     this.props.pingComputers(network, agentId, this.props.computers).then(() => {
-      setTimeout(this.refreshPing, 3000);
+      setTimeout(this.refreshPing, 15000);
     });
   };
 
@@ -128,6 +128,9 @@ class Table extends Component {
             className="mr-3"
             onClick={() => {
               var macs = _.keys(_.pickBy(this.state.selected));
+              this.setState({
+                selected: {}
+              });
               this.props.deleteComputers(macs, this.props.computers);
             }}
           >
