@@ -22,13 +22,14 @@ class NetworkInterface(object):
     @staticmethod
     def deserialize(data):
         return NetworkInterface(
-            description=data['description'], 
-            interface_type=data['interface_type'], 
+            description=data['description'],
+            interface_type=data['interface_type'],
             mtu=data['mtu'],
             speed=data['speed'],
             mac=data['mac'],
             out_octets=data['out_octets'],
             in_octets=data['in_octets'])
+
 
 class SNMPEndpoint(object):
     def __init__(self, name, description, location, uptime, interfaces):
@@ -50,8 +51,8 @@ class SNMPEndpoint(object):
     @staticmethod
     def deserialize(data):
         return SNMPEndpoint(
-            name=data['name'], 
-            description=data['description'], 
+            name=data['name'],
+            description=data['description'],
             location=data['location'],
             uptime=data['uptime'],
             interfaces=[NetworkInterface.deserialize(interface) for interface in data['interfaces']])
