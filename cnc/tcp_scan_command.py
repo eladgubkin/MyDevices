@@ -5,10 +5,11 @@ from cnc.ip_utils import parse_network
 from multiprocessing import Pool
 from cnc.settings import DEFAULT_POOL_PROCSESES
 
+
 def scan_ip(ip, ports):
     s = socket.socket()
     s.settimeout(0.1)
-    
+
     opened_ports = [port for port in ports if s.connect_ex((ip, port)) == 0]
 
     if len(opened_ports) == 0:
@@ -20,15 +21,16 @@ def scan_ip(ip, ports):
 class TcpScanCommand(Command):
     def __init__(self, command_id, network, ports):
         super(TcpScanCommand, self).__init__(command_id)
-        self.network = network  
+        self.network = network
         self.ports = ports
 
     async def execute(self, agent_manager):
         pool = Pool(DEFAULT_POOL_PROCSESES)
-        result = pool.starmap(scan_ip, [(ip, self.ports) for ip in parse_network(self.network)])
+        result = pool.starmap(scan_ip, [(ip, self.ports)
+                                        for ip in parse_network(self.network)])
         pool.close()
         pool.join()
-        
+
         return TcpScanCommandAnswer(self.command_id, dict((pair for pair in result if pair is not None)))
 
     def serialize(self):

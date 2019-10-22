@@ -3,6 +3,7 @@ from cnc.command import Command, CommandType, CommandAnswer
 
 TOTAL_MISSES = 5
 
+
 class TransferCommand(Command):
     def __init__(self, command_id, agent_id, command):
         super(TransferCommand, self).__init__(command_id)
@@ -11,7 +12,7 @@ class TransferCommand(Command):
 
     async def execute(self, agent_manager):
         from cnc.command_factory import CommandAnswerFactory
-        
+
         agent = agent_manager.get_agent(self.agent_id)
 
         async with agent.lock:
@@ -22,7 +23,8 @@ class TransferCommand(Command):
             while misses < TOTAL_MISSES:
                 answer = CommandAnswerFactory().deserialize(await agent.receive())
                 if answer.command_id != self.command.command_id:
-                    print('Missed answer: ', self.command.command_id, ', instead received', answer.command_id)
+                    print('Missed answer: ', self.command.command_id,
+                          ', instead received', answer.command_id)
                     misses += 1
                     continue
 
@@ -41,7 +43,7 @@ class TransferCommand(Command):
         from cnc.command_factory import CommandFactory
 
         return TransferCommand(command_id=data['commandId'],
-                               agent_id=data['agentId'], 
+                               agent_id=data['agentId'],
                                command=CommandFactory().deserialize(data['command']))
 
 

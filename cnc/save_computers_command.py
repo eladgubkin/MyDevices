@@ -5,6 +5,7 @@ import json
 import uuid
 import asyncpg
 
+
 class SaveComputersCommand(Command):
     def __init__(self, command_id, computers):
         super(SaveComputersCommand, self).__init__(command_id)
@@ -12,7 +13,7 @@ class SaveComputersCommand(Command):
 
     async def execute(self, agent_manager):
         computers = json.loads(self.computers)
-        
+
         for computer in computers:
             try:
                 await Computer.create(
@@ -24,10 +25,10 @@ class SaveComputersCommand(Command):
                     uptime=computer['uptime'],
                     download=computer['download'],
                     upload=computer['upload']
-                    )
+                )
             except asyncpg.exceptions.UniqueViolationError:
                 existing_computer = await Computer.get(computer['mac'])
-            
+
                 await existing_computer.update(
                     name=computer['name'],
                     ip=computer['ip'],
@@ -54,7 +55,7 @@ class SaveComputersCommand(Command):
 
 class SaveComputersCommandAnswer(CommandAnswer):
     def __init__(self, command_id):
-        super(SaveComputersCommandAnswer, self).__init__(command_id) 
+        super(SaveComputersCommandAnswer, self).__init__(command_id)
 
     def serialize(self):
         return dict({

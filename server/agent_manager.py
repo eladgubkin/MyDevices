@@ -4,7 +4,7 @@ class AgentManager(object):
 
     def get_all_agents(self):
         return self.agents.keys()
-        
+
     def get_agent(self, agent_id):
         return self.agents[agent_id]
 

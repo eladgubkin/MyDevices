@@ -8,7 +8,7 @@ class GetAgentsCommand(Command):
 
     async def execute(self, agent_manager):
         return GetAgentsCommandAnswer(self.command_id,
-            list(agent_manager.get_all_agents()))
+                                      list(agent_manager.get_all_agents()))
 
     def serialize(self):
         return {

@@ -58,8 +58,8 @@ async def connect_to_db():
     await db.gino.create_all()
     # await User.create(username='elad', password=
     #     bcrypt.hashpw('123456'.encode('utf-8'), bcrypt.gensalt()).decode('ascii'))
-    
-    
+
+
 @app.websocket('/web')
 # @protected()
 # @inject_user()
@@ -70,7 +70,7 @@ async def web_handler(request, ws):
     print('Connected')
 
     try:
-        await agent.send({ 'agentId': agent.id })
+        await agent.send({'agentId': agent.id})
 
         while True:
             command = CommandFactory().deserialize(await agent.receive())
@@ -91,13 +91,12 @@ async def agent_handler(request, ws):
     agent_manager.add_agent(agent)
 
     try:
-        await agent.send({ 'agentId': agent.id })
+        await agent.send({'agentId': agent.id})
 
         while True:
             await asyncio.sleep(1)
     finally:
         agent_manager.remove_agent(agent)
-
 
 
 if __name__ == '__main__':

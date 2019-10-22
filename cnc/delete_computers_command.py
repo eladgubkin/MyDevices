@@ -4,6 +4,7 @@ from server.models import db, Computer
 import json
 import asyncpg
 
+
 class DeleteComputersCommand(Command):
     def __init__(self, command_id, macs):
         super(DeleteComputersCommand, self).__init__(command_id)
@@ -31,12 +32,12 @@ class DeleteComputersCommand(Command):
     @staticmethod
     def deserialize(data):
         return DeleteComputersCommand(command_id=data['commandId'],
-                                    macs=data['computers'])
+                                      macs=data['computers'])
 
 
 class DeleteComputersCommandAnswer(CommandAnswer):
     def __init__(self, command_id):
-        super(DeleteComputersCommandAnswer, self).__init__(command_id) 
+        super(DeleteComputersCommandAnswer, self).__init__(command_id)
 
     def serialize(self):
         return dict({

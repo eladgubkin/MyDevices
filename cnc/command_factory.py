@@ -19,9 +19,11 @@ COMMANDS = {
     CommandType.DELETE_COMPUTERS: (DeleteComputersCommand, DeleteComputersCommandAnswer),
 }
 
+
 class CommandFactory(object):
     def deserialize(self, data):
         return COMMANDS[CommandType(data['type'])][0].deserialize(data)
+
 
 class CommandAnswerFactory(object):
     def deserialize(self, data):

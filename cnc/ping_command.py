@@ -4,6 +4,7 @@ from cnc.ip_utils import parse_network
 from multiprocessing import Pool
 from cnc.settings import DEFAULT_POOL_PROCSESES
 
+
 def ping(ip):
     return (ip, pythonping.ping(ip, count=1).rtt_avg_ms)
 
