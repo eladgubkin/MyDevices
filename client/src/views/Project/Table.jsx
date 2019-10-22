@@ -115,10 +115,12 @@ class Table extends Component {
       });
     }
 
-    console.log(this.state.selected);
     return (
       <Card>
         <CardTitle className="bg-light border-bottom p-3 mb-0 d-flex flex-row">
+          <Button color="success" size="sm" outline={true} className="mr-3">
+            Show on map
+          </Button>
           <Button
             color="danger"
             size="sm"
@@ -134,6 +136,18 @@ class Table extends Component {
           >
             Delete
           </Button>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              fontFamily: 'Source Code Pro',
+              fontWeight: 'bold',
+              padding: '5px'
+            }}
+          >
+            {data.length}
+          </div>
           <div
             style={{
               display: 'flex',
@@ -165,27 +179,6 @@ class Table extends Component {
           </InputGroup>
         </CardTitle>
         <CardBody>
-          {/* <InputGroup
-            style={{
-              padding: '15px'
-            }}
-          >
-            <Input
-              style={{
-                fontFamily: 'Source Code Pro',
-                fontWeight: 'bold'
-              }}
-              type="text"
-              placeholder="Search"
-              value={this.state.search}
-              onChange={e => this.setState({ search: e.target.value })}
-            />
-            <InputGroupAddon addonType="append">
-              <InputGroupText>
-                <i className="mdi mdi-magnify" />
-              </InputGroupText>
-            </InputGroupAddon>
-          </InputGroup> */}
           <ReactTable
             data={data}
             columns={[
