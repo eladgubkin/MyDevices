@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { Row, Col, Card } from "reactstrap";
-import Table from "./Table.jsx";
-import Map from "./Map";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Row, Col, Card } from 'reactstrap';
+import Table from './Table.jsx';
+import Map from './Map';
 // import Feeds from './feeds/feeds';
-// import Visitors from './Visitors';
+import Visitors from './Visitors';
 // import ProgressCards from './ProgressCards';
-import Buttons from "./Buttons";
-import { findAgents } from "../../state/ducks/agent/actions";
-import { getComputers } from "../../state/ducks/computer/actions";
-import RevenueCards from "./RevenueCards";
-import NewsleterCompaign from "./newsleter-compaign/newsleter-compaign";
-import CardBandwidth from "./CardBandwidth";
-import CardDownload from "./CardDownload";
+import Buttons from './Buttons';
+import { findAgents } from '../../state/ducks/agent/actions';
+import { getComputers } from '../../state/ducks/computer/actions';
+import RevenueCards from './RevenueCards';
+import NewsleterCompaign from './newsleter-compaign/newsleter-compaign';
+import CardBandwidth from './CardBandwidth';
+import CardDownload from './CardDownload';
 
 class Project extends Component {
   constructor(props) {
@@ -40,12 +40,12 @@ class Project extends Component {
 
         <Row>
           <Col xl="7" lg="7">
-            <Card style={{ height: "500px" }}>
+            <Card style={{ height: '500px' }}>
               <Map />
             </Card>
           </Col>
           <Col xl="5" lg="5">
-            {/* <Visitors /> */}
+            <Visitors />
             {/* <Feeds /> */}
           </Col>
         </Row>
