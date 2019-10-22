@@ -1,7 +1,7 @@
 import * as types from './types';
 
 const initState = {
-  currentTheme: 'dark'
+  currentTheme: 'light'
 };
 
 const settings = (state = initState, action) => {
