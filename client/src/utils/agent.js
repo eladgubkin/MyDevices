@@ -12,7 +12,7 @@ export const DELETE_COMPUTERS = 7;
 
 export default class Agent {
   constructor() {
-    this.ws = new WebSocket('ws://10.10.50.190:8000/web');
+    this.ws = new WebSocket('ws://127.0.0.1:8000/web');
     this.ws.onmessage = this.onMessage;
     this.currentCommand = null;
     this.commandsQueue = [];
