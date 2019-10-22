@@ -8,6 +8,7 @@ import Agent from '../../../utils/agent';
 // import { timeFormat } from '../../../utils/timeFormat';
 import moment from 'moment';
 import _ from 'lodash';
+import uuid from 'uuid';
 
 if (!window.agent) {
   window.agent = new Agent();
@@ -29,30 +30,54 @@ const searchComputers = (protocol, agentId, data) => dispatch => {
         console.log(foundComputersObj);
 
         for (const [ip] of Object.entries(foundComputersObj)) {
-          foundComputersArr.push({
-            name: foundComputersObj[ip].name,
-            ip: ip,
-            mac: foundComputersObj[ip].interfaces.find(
-              item => item.description === 'eth0.4'
-            ).mac,
-            ping: 0,
-            // uptime: timeFormat(foundComputersObj[ip].uptime),
-            uptime: moment
+          let name = '';
+          let description = '';
+          let location = '';
+          let uptime = '';
+          let mac;
+          let download;
+          let upload;
+
+          try {
+            name = foundComputersObj[ip].name;
+            description = foundComputersObj[ip].description;
+            location = foundComputersObj[ip].location;
+            uptime = moment
               .utc(foundComputersObj[ip].uptime * 1000)
-              .format('DD:HH:mm'),
-            description: foundComputersObj[ip].description,
-            location: foundComputersObj[ip].location,
-            upload: (
+              .format('DD:HH:mm');
+
+            mac = foundComputersObj[ip].interfaces.find(
+              item => item.description === 'eth0.4' || item.description === 'ptm0.3'
+            ).mac;
+
+            download = (
               foundComputersObj[ip].interfaces.find(
-                item => item.description === 'eth0.4'
-              ).out_octets / 10000000
-            ).toFixed(2),
-            download: (
-              foundComputersObj[ip].interfaces.find(
-                item => item.description === 'eth0.4'
+                item =>
+                  item.description === 'eth0.4' || item.description === 'ptm0.3'
               ).in_octets / 10000000
-            ).toFixed(2)
-            // interfaces: foundComputersObj[ip].interfaces
+            ).toFixed(2);
+
+            upload = (
+              foundComputersObj[ip].interfaces.find(
+                item =>
+                  item.description === 'eth0.4' || item.description === 'ptm0.3'
+              ).out_octets / 10000000
+            ).toFixed(2);
+          } catch (e) {
+            mac = uuid.v4();
+            download = '';
+            upload = '';
+          }
+          foundComputersArr.push({
+            name,
+            ip,
+            mac,
+            ping: 0,
+            description,
+            location,
+            uptime,
+            upload,
+            download
           });
         }
 
