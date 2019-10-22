@@ -9,10 +9,12 @@ from cnc.snmp import SNMPEndpoint, NetworkInterface
 # Load IF-MIB
 from pysnmp.smi import builder, view, compiler, rfc1902
 mibBuilder = builder.MibBuilder()
-compiler.addMibCompiler(mibBuilder, sources=['http://mibs.snmplabs.com/asn1/@mib@'])
+compiler.addMibCompiler(mibBuilder, sources=[
+                        'http://mibs.snmplabs.com/asn1/@mib@'])
 mibBuilder.loadModules('SNMPv2-MIB', 'IF-MIB')
 
 snmp_engine = SnmpEngine()
+
 
 def snmp_scan(ip):
     community = 'public'
@@ -45,11 +47,11 @@ def snmp_scan(ip):
         ObjectType(ObjectIdentity('IF-MIB', 'ifPhysAddress')),
         ObjectType(ObjectIdentity('IF-MIB', 'ifOutOctets')),
         ObjectType(ObjectIdentity('IF-MIB', 'ifInOctets')),
-        lexicographicMode=False):
+            lexicographicMode=False):
 
         if error_indication or error_status:
             continue
-        
+
         description, interface_type, mtu, speed, mac, out_octets, in_octets = var_binds
 
         interfaces.append(NetworkInterface(
@@ -67,8 +69,9 @@ def snmp_scan(ip):
         location=location[1].prettyPrint(),
         uptime=int(uptime[1]),
         interfaces=interfaces)
-    
+
     return (ip, endpoint)
+
 
 class SNMPScanCommand(Command):
     def __init__(self, command_id, network, community):
@@ -76,14 +79,14 @@ class SNMPScanCommand(Command):
         self.network = network
         self.community = community
 
-    async def execute(self, agent_manager): 
+    async def execute(self, agent_manager):
         pool = Pool(DEFAULT_POOL_PROCSESES)
         result = pool.map(snmp_scan, parse_network(self.network))
         pool.close()
         pool.join()
-        
-        return SNMPScanCommandAnswer(self.command_id, 
-            dict(item for item in result if item is not None))
+
+        return SNMPScanCommandAnswer(self.command_id,
+                                     dict(item for item in result if item is not None))
 
     def serialize(self):
         return {
@@ -95,10 +98,9 @@ class SNMPScanCommand(Command):
 
     @staticmethod
     def deserialize(data):
-        return SNMPScanCommand(command_id=data['commandId'], 
-                               network=data['network'], 
+        return SNMPScanCommand(command_id=data['commandId'],
+                               network=data['network'],
                                community=data['community'])
-
 
 
 class SNMPScanCommandAnswer(CommandAnswer):
@@ -115,5 +117,5 @@ class SNMPScanCommandAnswer(CommandAnswer):
 
     @staticmethod
     def deserialize(data):
-        return SNMPScanCommandAnswer(data['commandId'], 
-            dict((ip, SNMPEndpoint.deserialize(endpoint)) for (ip, endpoint) in data['result'].items()))
+        return SNMPScanCommandAnswer(data['commandId'],
+                                     dict((ip, SNMPEndpoint.deserialize(endpoint)) for (ip, endpoint) in data['result'].items()))
